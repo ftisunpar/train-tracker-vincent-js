@@ -280,7 +280,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     public void TestClick(View view) {
-        setContentView(R.layout.second_layout);
+        setContentView(R.layout.activity_login);
     }
 
 
