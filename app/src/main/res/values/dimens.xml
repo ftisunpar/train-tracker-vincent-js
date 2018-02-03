@@ -6,11 +6,11 @@
     <dimen name="ukuran_logo">100dp</dimen>
     <dimen name="margin_bottom">20dp</dimen>
     <dimen name="margin_top_sign_up">130dp</dimen>
-<<<<<<< Updated upstream
+
     <dimen name="ukuran_judul_notif">30sp</dimen>
     <dimen name="ukuran_tulisan_notif">25sp</dimen>
     <dimen name="margin_notif">30dp</dimen>
-=======
+
     <dimen name="margin_top_notif_text">10dp</dimen>
     <dimen name="size_text_notif">20dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
@@ -22,5 +22,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="profile_width">75dp</dimen>
     <dimen name="profile_height">75dp</dimen>
->>>>>>> Stashed changes
+
 </resources>

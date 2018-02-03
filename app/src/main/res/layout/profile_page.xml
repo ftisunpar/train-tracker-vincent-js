@@ -18,7 +18,7 @@
             <ImageView
                 android:layout_width="135dp"
                 android:layout_height="197dp"
-                android:src="@drawable/S__12558359" />
+                android:src="@drawable/penyakit" />
         </LinearLayout>
 
     </RelativeLayout>
