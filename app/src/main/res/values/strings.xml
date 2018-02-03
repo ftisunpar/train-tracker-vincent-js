@@ -21,6 +21,11 @@
     <string name="sAkhir">Stasiun Akhir</string>
 
     <string name="notif">Set Notification</string>
+    <string name="history">List Trip</string>
+    <string name="duration">DURATION  </string>
+    <string name="date">DATE  </string>
+
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

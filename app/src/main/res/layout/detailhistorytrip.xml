@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ROUTE"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:id="@+id/Judul"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorPrimaryDark"
+
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Judul"
+        android:layout_marginTop="10dp"
+        android:id="@+id/Route"
+        android:background="@color/colorPrimaryDark"
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:id="@+id/Start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start From "
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:padding="4dp"
+                android:background="@drawable/rounded_corner"
+                />
+            <TextView
+                android:id="@+id/to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_toRightOf="@+id/Start"
+                android:text="TO"
+                android:padding="4dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/Destination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:text="Destination "
+                android:textColor="#000000"
+                android:layout_toRightOf="@+id/to"
+                android:textSize="20sp"
+                android:padding="4dp"
+                android:background="@drawable/rounded_corner"
+                />
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Route"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/Time">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/duration"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Time"
+        android:layout_marginTop="10dp"
+        android:id="@+id/waktu"
+        android:background="@color/colorPrimaryDark"
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5 hour 3 minute"
+                android:textColor="@color/black"
+                android:padding="5dp"
+                android:background="@drawable/rounded_corner"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/waktu"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/day">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+
+            />
+
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/day"
+        android:layout_marginTop="10dp"
+        android:id="@+id/hari"
+        android:background="@color/colorPrimaryDark"
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="14 JUNE"
+                android:textColor="@color/black"
+                android:padding="5dp"
+                android:background="@drawable/rounded_corner"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+
+
+
+        </RelativeLayout>
+
