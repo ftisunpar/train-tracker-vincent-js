@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ROUTE"
+        android:text="Trip Details"
         android:gravity="center"
         android:textSize="30dp"
         android:id="@+id/Judul"
@@ -23,12 +23,12 @@
         android:layout_marginTop="10dp"
         android:id="@+id/Route"
         android:background="@color/colorPrimaryDark"
-
         >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
+
             android:gravity="center"
             >
 
@@ -71,106 +71,55 @@
 
     </RelativeLayout>
 
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Route"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/Time">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/duration"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:textColor="@color/colorPrimaryDark"
-
-            />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Time"
-        android:layout_marginTop="10dp"
-        android:id="@+id/waktu"
-        android:background="@color/colorPrimaryDark"
-
+        android:layout_marginTop="20dp"
         >
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:gravity="center"
-            >
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:gravity="center"
+                android:textSize="@dimen/font_detail"
+                android:id="@+id/date"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5 hour 3 minute"
-                android:textColor="@color/black"
-                android:padding="5dp"
-                android:background="@drawable/rounded_corner"
-                />
+                android:layout_below="@id/date"
+                android:id="@+id/tanggal_trip"
+                android:text="15 januari 2018"/>
+
         </RelativeLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/waktu"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/day">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/date"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:textColor="@color/colorPrimaryDark"
-
-            />
 
 
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/day"
-        android:layout_marginTop="10dp"
-        android:id="@+id/hari"
-        android:background="@color/colorPrimaryDark"
-
-        >
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:gravity="center"
-            >
+            android:layout_weight="1">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="14 JUNE"
-                android:textColor="@color/black"
-                android:padding="5dp"
-                android:background="@drawable/rounded_corner"
+                android:text="Duration"
+                android:gravity="center"
+                android:textSize="@dimen/font_detail"
                 />
-        </RelativeLayout>
-    </RelativeLayout>
-
-
-
-
-
 
         </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+
+
+
+
 

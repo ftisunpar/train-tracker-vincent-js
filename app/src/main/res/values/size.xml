@@ -2,4 +2,5 @@
 
 <resources>
  <integer name="size_text_notif">10</integer>
+
 </resources>
