@@ -17,9 +17,17 @@
     </string>
 
     <string name="setNotif">SET NOTIFICATION</string>
-    <string name="sAwal">Stasiun Awal</string>
-    <string name="sAkhir">Stasiun Akhir</string>
-
+    <string name="sAwal">Stasiun Awal:</string>
+    <string name="sAkhir">Stasiun Akhir:</string>
+    <string-array name="names">
+        <item>Home</item>
+        <item>Work</item>
+        <item>Other</item>
+        <item>Costume</item>
+    </string-array>
+    
+    
+    
     <string name="notif">Set Notification</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
