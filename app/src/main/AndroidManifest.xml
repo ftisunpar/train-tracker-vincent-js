@@ -28,7 +28,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TabMenu"></activity>
+        <activity
+            android:name=".Drawer_nav"
+            android:label="@string/title_activity_drawer_nav"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
