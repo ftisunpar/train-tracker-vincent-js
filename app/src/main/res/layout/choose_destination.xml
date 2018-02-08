@@ -12,7 +12,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="197dp"
-        android:text="SET!"
+        android:text="GO!"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="220dp" />
 
@@ -23,29 +23,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="58dp"
-        android:text="Set Notification"
+        android:text="Argo Wilis"
         android:textSize="@dimen/ukuran_judul_notif"/>
 
-<<<<<<< HEAD
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sAwal"
-            android:layout_margin="@dimen/margin_notif"
-            android:textSize="@dimen/ukuran_tulisan_notif"
-            />
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:id="@+id/spinner1"
-            >
-
-        </Spinner>
-
-    </LinearLayout>
-=======
     <TextView
         android:id="@+id/start_wilis"
         android:layout_width="wrap_content"
@@ -56,7 +36,6 @@
         android:layout_toStartOf="@+id/argo_wilis"
         android:textSize="@dimen/ukuran_tulisan_notif"
         android:text="Start" />
->>>>>>> 15804e98d64753de41ef584f60424acbdccba9e4
 
     <TextView
         android:id="@+id/end_wilis"
@@ -72,35 +51,6 @@
         android:id="@+id/spinner_start_wilis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sAkhir"
-            android:layout_margin="@dimen/margin_notif"
-            android:textSize="@dimen/ukuran_tulisan_notif"
-            />
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:id="@+id/spinner2"
-            >
-
-        </Spinner>
-            android:id="@+id/spinner1"/>
-    </LinearLayout>
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go"/>
-</LinearLayout>
-=======
         android:layout_alignBottom="@+id/start_wilis"
         android:layout_alignParentStart="true" />
 
@@ -111,4 +61,3 @@
         android:layout_alignBottom="@+id/end_wilis"
         android:layout_alignParentStart="true" />
 </RelativeLayout>
->>>>>>> 15804e98d64753de41ef584f60424acbdccba9e4
