@@ -13,6 +13,7 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     public void TestClick(View view) {
-        this.startActivity(activity_login);
+       // this.startActivity(activity_login);
     }//test
+
 }
