@@ -10,6 +10,6 @@
     <color name="grey">#a9a9a9</color>
     <color name="white">#ffffff</color>
     <color name="profilename">#fff</color>
-
+    <color name="fontColor">#0000ff</color>
 
 </resources>

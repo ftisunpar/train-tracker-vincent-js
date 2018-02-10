@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btn_go"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="197dp"
+        android:text="GO!"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="220dp" />
+
+    <TextView
+        android:id="@+id/argo_wilis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp"
+        android:text="Argo Wilis"
+        android:textSize="@dimen/ukuran_judul_notif"/>
+
+    <TextView
+        android:id="@+id/start_wilis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/argo_wilis"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="57dp"
+        android:layout_toStartOf="@+id/argo_wilis"
+        android:textSize="@dimen/ukuran_tulisan_notif"
+        android:text="Start" />
+
+    <TextView
+        android:id="@+id/end_wilis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_go"
+        android:layout_alignStart="@+id/start_wilis"
+        android:layout_marginBottom="48dp"
+        android:text="End"
+        android:textSize="@dimen/ukuran_tulisan_notif" />
+
+    <Spinner
+        android:id="@+id/spinner_start_wilis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/start_wilis"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:id="@+id/spinner_end_wilis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/end_wilis"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>
