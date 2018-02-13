@@ -156,8 +156,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }else{
                 return false;
             }
-            return false;
+
         }
+        return false;
     }
 
 
