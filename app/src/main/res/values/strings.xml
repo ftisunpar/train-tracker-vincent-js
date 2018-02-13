@@ -25,9 +25,8 @@
         <item>Other</item>
         <item>Costume</item>
     </string-array>
-    
-    
-    
+
+
     <string name="notif">Set Notification</string>
     <string name="history">List Trip</string>
     <string name="duration">DURATION  </string>
@@ -69,6 +68,92 @@
 
     <string name="INTRODUCTION">Welcome to Train Tracker App</string>
     <string name="introteam">Dibuat untuk Tugas Proyek Informatika</string>
-    <string name="next">LANJUT</string>
+    <string name="next">NEXT</string>
+    <string name="choose_train">Choose Your Train</string>
+    <string-array name="list_kereta">
+        <item>Argo Wilis</item>
+        <item>Argo Parahyangan</item>
+        <item>Argo Bromo Anggrek</item>
+        <item>Argo Dwipangga</item>
+        <item>Argo Lawu</item>
+        <item>Argo Muria</item>
+        <item>Argo Sundoro</item>
+        <item>Gajayana</item>
+        <item>Sembrani</item>
+        <item>Bima</item>
+        <item>Taksaka</item>
+        <item>Turangga</item>
+        <item>Bangunkarta</item>
+        <item>Purwojaya</item>
+        <item>Lodaya</item>
+        <item>Mutiara Selatan</item>
+        <item>Mutiara Timur</item>
+        <item>Limex Sriwijaya</item>
+        <item>Ranggajati</item>
+        <item>Sawunggalih Utama</item>
+        <item>Sindang Marga</item>
+        <item>Sribilah</item>
+        <item>Fajar Utama Yogya</item>
+        <item>Sawunggalih Utama</item>
+        <item>Senja Utama Solo</item>
+        <item>Senja Utama Yogya</item>
+        <item>Sidomukti</item>
+        <item>Ciremai</item>
+        <item>Gumarang</item>
+        <item>Harina</item>
+        <item>Malabar</item>
+        <item>Cirebon Ekspres</item>
+        <item>Malioboro Ekspres</item>
+        <item>Pangrango</item>
+        <item>Sancaka</item>
+        <item>Tegal Bahari</item>
+        <item>Ambarawa Ekspres</item>
+        <item>Bogowonto</item>
+        <item>Gajah Wong</item>
+        <item>Jaka Tingkir</item>
+        <item>Jayabaya Utara</item>
+        <item>Joglokerto</item>
+        <item>Kaligung</item>
+        <item>Kamandaka</item>
+        <item>Krakatau</item>
+        <item>Majapahit</item>
+        <item>Menoreh</item>
+        <item>Banten Ekspres</item>
+        <item>Bengawan</item>
+        <item>Brantas</item>
+        <item>Cilamaya Ekspres</item>
+        <item>Gaya Baru Malam</item>
+        <item>Jatiluhur Ekspres</item>
+        <item>Kahuripan</item>
+        <item>Kalijaga</item>
+        <item>Kalimaya</item>
+        <item>Kertajaya</item>
+        <item>Kutojaya Selatan</item>
+        <item>Kutojaya Utara</item>
+        <item>Langsam</item>
+        <item>Logawa</item>
+        <item>Maharani</item>
+        <item>Matarmaja</item>
+        <item>Pandanwangi</item>
+        <item>Pasundan</item>
+        <item>Penataran</item>
+        <item>Probowangi</item>
+        <item>Progo</item>
+        <item>Putri Deli</item>
+        <item>Rangkas Jaya</item>
+        <item>Rapih Dhoho</item>
+        <item>Rajabasa</item>
+        <item>Serayu</item>
+        <item>Siantar Ekspres</item>
+        <item>Serelo</item>
+        <item>Sibinuang</item>
+        <item>Siliwangi</item>
+        <item>Simandra</item>
+        <item>Sri Tanjung</item>
+        <item>Tawang Alun</item>
+        <item>Tawang Jaya</item>
+        <item>Tegal Ekspres</item>
+        <item>Walahar Express</item>
+    </string-array>
 
 </resources>

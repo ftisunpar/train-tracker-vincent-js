@@ -29,5 +29,7 @@
         android:layout_height="wrap_content"
         style="@style/ButtonStyle"
         android:text="@string/next"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:onClick="nextClicked"
+      />
 </RelativeLayout>
