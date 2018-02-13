@@ -166,7 +166,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onConnected(@Nullable Bundle bundle) {
         locationRequest=new LocationRequest();
         locationRequest.setInterval(1000);
-        locationRequest.getFastestInterval(1000);
+        int interval=1000;
+        locationRequest.getFastestInterval();
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)==PackageManager.PERMISSION_GRANTED){
             LocationServices.FusedLocationApi.requestLocationUpdates(client,locationRequest,this);
