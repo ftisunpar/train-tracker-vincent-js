@@ -25,9 +25,8 @@
         <item>Other</item>
         <item>Costume</item>
     </string-array>
-    
-    
-    
+
+
     <string name="notif">Set Notification</string>
     <string name="history">List Trip</string>
     <string name="duration">DURATION  </string>
@@ -69,6 +68,7 @@
 
     <string name="INTRODUCTION">Welcome to Train Tracker App</string>
     <string name="introteam">Dibuat untuk Tugas Proyek Informatika</string>
-    <string name="next">LANJUT</string>
+    <string name="next">NEXT</string>
+    <string name="choose_train">Choose Your Train</string>
 
 </resources>

@@ -16,7 +16,6 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-
 allprojects {
     repositories {
         jcenter()
@@ -24,6 +23,21 @@ allprojects {
             url 'https://jitpack.io'
         }
         google()
+    }
+}
+allprojects {
+    repositories {
+        jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        google()
+    }
+}
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
     }
 }
 
