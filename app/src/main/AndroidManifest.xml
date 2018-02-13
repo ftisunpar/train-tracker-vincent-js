@@ -33,6 +33,9 @@
             android:label="@string/title_activity_drawer_nav"
             android:theme="@style/AppTheme" />
         <activity android:name=".choosetrain"></activity>
+        <activity android:name=".MainActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
     </application>
 
 </manifest>
