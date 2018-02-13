@@ -47,6 +47,12 @@
         <activity android:name=".MainActivity"
             android:parentActivityName=".MainActivity">
         </activity>
+        <activity android:name=".ChooseDestination"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity android:name=".OnProgress"
+            android:parentActivityName=".ChooseDestination">
+        </activity>
     </application>
 
 </manifest>
