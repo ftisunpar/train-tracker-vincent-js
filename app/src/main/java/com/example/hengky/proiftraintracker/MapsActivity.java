@@ -3,6 +3,8 @@ package com.example.hengky.proiftraintracker;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
@@ -12,6 +14,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -29,6 +33,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -98,6 +105,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -111,6 +119,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED){
                 buildGoogleApiClient();
                 mMap.setMyLocationEnabled(true);
+                mMap.moveCamera();
+                mMap.animateCamera();
             }
 
             return;
@@ -153,6 +163,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_FINE_LOCATION)){
                 ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},PERMISSION_LOCATION_CODE);
+
             }else{
                 return false;
             }
@@ -160,7 +171,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         return false;
     }
-
+//onclick on search button
+    public void onClick(View v){
+        if(v.getId()==R.id.//searchBox){
+         EditText tf_locatioon=(EditText)findViewById(R.id.TF_location);
+        String location=tf_location.getText().toString();
+        List<Address> addressList=null;
+        MarkerOptions mo=new MarkerOptions();
+        //checking empty string or not
+        if(!location.equals("")){
+            Geocoder geocoder=new Geocoder(this);
+            try {
+                addressList=geocoder.getFromLocationName(location,5);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            for(int i=0;i<addressList.size();i++){
+                Address myAddress=addressList.get(i);
+                LatLng latLng=new LatLng(myAddress.getLatitude(),myAddress.getLongitude());
+                mo.position(latLng);
+                //mo.title("search result is");
+                //mo.title is for adding text after searching result is out
+                mMap.addMarker(mo);
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+            }
+        }
+    }
 
 
     @Override
@@ -172,6 +208,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)==PackageManager.PERMISSION_GRANTED){
             LocationServices.FusedLocationApi.requestLocationUpdates(client,locationRequest,this);
+            lastLocation=LocationServices.FusedLocationApi.getLastLocation(client);
         }
 
 
