@@ -23,4 +23,9 @@ public class ChooseDestination extends AppCompatActivity {
         Intent intent = new Intent(this, OnProgress.class);
         startActivity(intent);
     }
+
+    public void openMap(View view){
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
 }
