@@ -54,20 +54,7 @@
                 android:gravity="center"
                 android:id="@+id/namaJalan"
                 />
-            <io.victoralbertos.breadcumbs_view.BreadcrumbsView
-                android:id="@+id/breadcrumbs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:numberOfSteps="5"
-                app:visitedStepBorderDotColor="@color/colorVisited"
-                app:visitedStepFillDotColor="@color/colorVisited"
-                app:nextStepBorderDotColor="@color/colorNext"
-                app:nextStepFillDotColor="@color/colorNext"
-                app:visitedStepSeparatorColor="@color/colorVisited"
-                app:nextStepSeparatorColor="@color/colorNext"
-                app:radiusDot="@dimen/radius_dot"
-                app:sizeDotBorder="@dimen/size_dot_border"
-                app:heightSeparator="@dimen/height_separator"/>
+
         </LinearLayout>
 
         <ImageView
@@ -92,7 +79,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_below="@+id/map"
 
