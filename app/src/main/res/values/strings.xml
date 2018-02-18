@@ -15,7 +15,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-
+    <string name="openMap">OPEN MAP</string>
     <string name="setNotif">SET NOTIFICATION</string>
     <string name="sAwal">Stasiun Awal:</string>
     <string name="sAkhir">Stasiun Akhir:</string>
@@ -156,5 +156,19 @@
         <item>Walahar Express</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
-
+    <string-array name="list_stasiun_argo_wilis">
+        <item>Surabaya Gubeng</item>
+        <item>Jombang</item>
+        <item>Madiun</item>
+        <item>Solo Balapan</item>
+        <item>Yogyakarta</item>
+        <item>Kutoarjo</item>
+        <item>Kroya</item>
+        <item>Banjar</item>
+        <item>Tasikmalaya</item>
+        <item>Cipeundeuy</item>
+        <item>Bandung</item>
+    </string-array>
+    <string name="stasiun_tujuan">Stasiun Tujuan</string>
+    <string name="stasiun_asal">Stasiun Asal</string>
 </resources>

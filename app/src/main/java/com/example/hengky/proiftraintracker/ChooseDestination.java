@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 
@@ -17,6 +19,17 @@ public class ChooseDestination extends AppCompatActivity {
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         TextView textView = findViewById(R.id.argo_wilis);
         textView.setText(message);
+
+        String[]list_stasiun = getResources().getStringArray(R.array.list_stasiun_argo_wilis);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_start_wilis);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list_stasiun);
+        spinner.setAdapter(adapter);
+
+        Spinner spinner2 = (Spinner) findViewById(R.id.spinner_end_wilis);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list_stasiun);
+        spinner2.setAdapter(adapter2);
     }
 
     public void moveToTripPage(View view){

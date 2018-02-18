@@ -28,4 +28,6 @@
     <dimen name="size_dot_border">1dp</dimen>
     <dimen name="height_separator">1dp</dimen>
     <dimen name="radius_dot">5dp</dimen>
+    <dimen name="jarak_antar_button">20dp</dimen>
+    <dimen name="margin_antar_element">15dp</dimen>
 </resources>
