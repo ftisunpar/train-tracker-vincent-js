@@ -1,8 +1,13 @@
 package com.example.hengky.proiftraintracker;
 
+import android.location.Location;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -10,7 +15,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,GoogleMap.OnMyLocationButtonClickListener,GoogleMap.OnMyLocationClickListener,GoogleApiClient.ConnectionCallbacks {
 
     private GoogleMap mMap;
 
@@ -43,5 +48,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    //location button clicked
+    @Override
+    public boolean onMyLocationButtonClick() {
+        Toast.makeText(this,"MyLocation button clicked", Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    //blue dot location clicked
+    @Override
+    public void onMyLocationClick(@NonNull Location location) {
+        Toast.makeText(this,"Current Location:\n" + location,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
     }
 }
