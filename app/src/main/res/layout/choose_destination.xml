@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundimage"
+    >
 
 
 
@@ -15,7 +17,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="58dp"
         android:text="Argo Wilis"
-        android:textColor="@color/fontColor"
+        android:textColor="@color/black"
         android:textSize="@dimen/ukuran_judul_notif"/>
 
     <TextView
@@ -61,6 +63,7 @@
         android:layout_marginTop="@dimen/margin_antar_element"
         android:text="@string/GO"
         style="@style/ButtonStyle"
+        android:background="@drawable/rounded_button"
         android:layout_below="@id/spinner_end_wilis"
         android:onClick="moveToTripPage"/>
 
@@ -69,6 +72,7 @@
         style="@style/ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
         android:layout_below="@id/btn_go"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/jarak_antar_button"
