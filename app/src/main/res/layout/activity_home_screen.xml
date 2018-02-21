@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.hengky.proiftraintracker.HomeScreen">
+    tools:context="com.example.hengky.proiftraintracker.HomeScreen"
+    android:background="@drawable/backgroundimage">
 
     <TextView
         android:layout_width="match_parent"
@@ -13,7 +14,7 @@
         android:fontFamily="sans-serif"
         android:text="@string/INTRODUCTION"
         android:gravity="center"
-        android:textColor="@color/fontColor"
+        android:textColor="@color/black"
         android:textSize="@dimen/size_text_notif"
         android:layout_centerHorizontal="true"/>
     <ImageView
@@ -31,5 +32,6 @@
         android:text="@string/next"
         android:layout_centerInParent="true"
         android:onClick="nextClicked"
+        android:background="@drawable/rounded_button"
       />
 </RelativeLayout>

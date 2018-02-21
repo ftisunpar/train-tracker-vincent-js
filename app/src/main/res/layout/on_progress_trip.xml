@@ -54,20 +54,12 @@
                 android:gravity="center"
                 android:id="@+id/namaJalan"
                 />
-            <io.victoralbertos.breadcumbs_view.BreadcrumbsView
-                android:id="@+id/breadcrumbs"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:numberOfSteps="5"
-                app:visitedStepBorderDotColor="@color/colorVisited"
-                app:visitedStepFillDotColor="@color/colorVisited"
-                app:nextStepBorderDotColor="@color/colorNext"
-                app:nextStepFillDotColor="@color/colorNext"
-                app:visitedStepSeparatorColor="@color/colorVisited"
-                app:nextStepSeparatorColor="@color/colorNext"
-                app:radiusDot="@dimen/radius_dot"
-                app:sizeDotBorder="@dimen/size_dot_border"
-                app:heightSeparator="@dimen/height_separator"/>
+                android:layout_below="@id/namaJalan"
+                android:textColor="@color/white"
+                android:text="SPEED"/>
         </LinearLayout>
 
         <ImageView
@@ -81,32 +73,20 @@
 
     </RelativeLayout>
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:id="@+id/map"
-        tools:context=".MapsActivity"
-        android:layout_below="@+id/info"
-       />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:layout_below="@+id/map"
 
-        >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Time Estimation "
-        android:gravity="center"
-        android:paddingTop="10dp"
-        android:id="@+id/TimeE"
-        android:textSize="20dp"
-        android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time Estimation "
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:id="@+id/TimeE"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -114,7 +94,7 @@
             android:text="17 m "
             android:gravity="center"
             android:paddingTop="10dp"
-            android:layout_below="@+id/TimeE"
+            android:layout_above="@id/TimeE"
             android:id="@+id/TimeR"
             />
 
@@ -123,7 +103,7 @@
             style="?android:attr/listSeparatorTextViewStyle"
             android:paddingTop="5dip"
             android:gravity="center_horizontal"
-            android:layout_below="@+id/TimeR"
+            android:layout_above="@id/TimeE"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/black"
@@ -132,5 +112,5 @@
             android:layout_marginTop="20dp"
             />
 
-    </RelativeLayout>
+
 </RelativeLayout>

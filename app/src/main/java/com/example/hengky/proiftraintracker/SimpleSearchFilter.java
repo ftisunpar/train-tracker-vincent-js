@@ -11,7 +11,7 @@ import ir.mirrajabi.searchdialog.core.FilterResultListener;
 import ir.mirrajabi.searchdialog.core.Searchable;
 
 /**
- * Created by Hengky on 2/13/2018.
+ * Created by Vincent on 2/13/2018.
  */
 
 public class SimpleSearchFilter<T extends Searchable> extends BaseFilter {
