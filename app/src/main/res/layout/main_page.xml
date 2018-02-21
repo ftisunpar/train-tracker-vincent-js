@@ -27,6 +27,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="Search"
+        android:background="@color/startblue"
         style="@style/ButtonStyle">
 
     </Button>
