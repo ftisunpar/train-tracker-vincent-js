@@ -29,7 +29,6 @@
         android:layout_centerVertical="true"
         android:background="@drawable/rounded_button"
         android:text="Search"
-        android:background="@color/startblue"
         style="@style/ButtonStyle">
 
     </Button>
