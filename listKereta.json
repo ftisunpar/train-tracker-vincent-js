@@ -1,0 +1,254 @@
+{
+	"listKereta":{
+		"1" :{
+			"name" : "Argo Wilis"
+		},
+		"2" :{
+			"name" : "Argo Parahyangan"
+		},
+		"3" :{
+			"name" : "Argo Bromo Anggrek"
+		},
+		"4" :{
+			"name" : "Argo Dwipangga"
+		},
+		"5" :{
+			"name" : "Argo Lawu"
+		},
+		"6" :{
+			"name" : "Argo Muria"
+		},
+		"7" :{
+			"name" : "Argo Sundoro"
+		},
+		"8" :{
+			"name" : "Gajayana"
+		},
+		"9" :{
+			"name" : "Sembrani"
+		},
+		"10" :{
+			"name" : "Bima"
+		},
+		"11" :{
+			"name" : "Taksaka"
+		},
+		"12" :{
+			"name" : "Turangga"
+		},
+		"13" :{
+			"name" : "Bangunkarta"
+		},
+		"14" :{
+			"name" : "Purwojaya"
+		},
+		"15" :{
+			"name" : "Lodaya"
+		},
+		"16" :{
+			"name" : "Mutiara Selatan"
+		},
+		"17" :{
+			"name" : "Mutiara Timur"
+		},
+		"18" :{
+			"name" : "Limex Sriwijaya"
+		},
+		"19" :{
+			"name" : "Ranggajati"
+		},
+		"20" :{
+			"name" : "Sawunggalih Utama"
+		},
+		"21" :{
+			"name" : "Sindang Marga"
+		},
+		"22" :{
+			"name" : "Sribilah"
+		},
+		"23" :{
+			"name" : "Fajar Utama Yogya"
+		},
+		"24" :{
+			"name" : "Sawunggalih Utama"
+		},
+		"25" :{
+			"name" : "Senja Utama Solo"
+		},
+		"26" :{
+			"name" : "Senja Utama Yogya"
+		},
+		"27" :{
+			"name" : "Sidomukti"
+		},
+		"28" :{
+			"name" : "Ciremai"
+		},
+		"29" :{
+			"name" : "Gumarang"
+		},
+		"30" :{
+			"name" : "Harina"
+		},
+		"31" :{
+			"name" : "Malabar"
+		},
+		"32" :{
+			"name" : "Cirebon Ekspres"
+		},
+		"33" :{
+			"name" : "Malioboro Ekspres"
+		},
+		"34" :{
+			"name" : "Pangrango"
+		},
+		"35" :{
+			"name" : "Sancaka"
+		},
+		"36" :{
+			"name" : "Tegal Bahari"
+		},
+		"37" :{
+			"name" : "Ambarawa Ekspres"
+		},
+		"38" :{
+			"name" : "Bogowonto"
+		},
+		"39" :{
+			"name" : "Gajah Wong"
+		},
+		"40" :{
+			"name" : "Jaka Tingkir"
+		},
+		"41" :{
+			"name" : "Jayabaya Utara"
+		},
+		"42" :{
+			"name" : "Joglokerto"
+		},
+		"43" :{
+			"name" : "Kaligung"
+		},
+		"44" :{
+			"name" : "Kamandaka"
+		},
+		"45" :{
+			"name" : "Krakatau"
+		},
+		"46" :{
+			"name" : "Majapahit"
+		},
+		"47" :{
+			"name" : "Menoreh"
+		},
+		"48" :{
+			"name" : "Banten Ekspres"
+		},
+		"49" :{
+			"name" : "Bengawan"
+		},
+		"50" :{
+			"name" : "Brantas"
+		},
+		"51" :{
+			"name" : "Cilamaya Ekspres"
+		},
+		"52" :{
+			"name" : "Gaya Baru Malam"
+		},
+		"53" :{
+			"name" : "Jatiluhur Ekspres"
+		},
+		"54" :{
+			"name" : "Kahuripan"
+		},
+		"55" :{
+			"name" : "Kalijaga"
+		},
+		"56" :{
+			"name" : "Kalimaya"
+		},
+		"57" :{
+			"name" : "Kertajaya"
+		},
+		"58" :{
+			"name" : "Kutojaya Selatan"
+		},
+		"59" :{
+			"name" : "Kutojaya Utara"
+		},
+		"60" :{
+			"name" : "Langsam"
+		},
+		"61" :{
+			"name" : "Logawa"
+		},
+		"62" :{
+			"name" : "Maharani"
+		},
+		"63" :{
+			"name" : "Matarmaja"
+		},
+		"64" :{
+			"name" : "Pandanwangi"
+		},
+		"65" :{
+			"name" : "Pasundan"
+		},
+		"66" :{
+			"name" : "Penataran"
+		},
+		"67" :{
+			"name" : "Probowangi"
+		},
+		"68" :{
+			"name" : "Progo"
+		},
+		"69" :{
+			"name" : "Putri Deli"
+		},
+		"70" :{
+			"name" : "Rangkas Jaya"
+		},
+		"71" :{
+			"name" : "Rapih Dhoho"
+		},
+		"72" :{
+			"name" : "Rajabasa"
+		},
+		"73" :{
+			"name" : "Serayu"
+		},
+		"74" :{
+			"name" : "Siantar Ekspres"
+		},
+		"75" :{
+			"name" : "Serelo"
+		},
+		"76" :{
+			"name" : "Sibinuang"
+		},
+		"77" :{
+			"name" : "Siliwangi"
+		},
+		"78" :{
+			"name" : "Simandra"
+		},
+		"79" :{
+			"name" : "Sri Tanjung"
+		},
+		"80" :{
+			"name" : "Tawang Alun"
+		},
+		"81" :{
+			"name" : "Tawang Jaya"
+		},
+		"82" :{
+			"name" : "Tegal Ekspres"
+		},
+		"83" :{
+			"name" : "Walahar Ekspres"
+		}
+
+	}
+}
