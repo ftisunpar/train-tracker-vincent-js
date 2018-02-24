@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundimage"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/backgroundimage">
 
 
 
@@ -39,9 +38,12 @@
         android:text="@string/stasiun_tujuan"
         android:textSize="@dimen/ukuran_tulisan_notif" />
 
+
     <Spinner
+
         android:id="@+id/spinner_start_wilis"
-        android:layout_width="match_parent"
+
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/start_wilis"
         android:layout_marginTop="@dimen/margin_antar_element"
@@ -78,4 +80,5 @@
         android:layout_marginTop="@dimen/jarak_antar_button"
         android:onClick="openMap"
         android:text="@string/openMap" />
+
 </RelativeLayout>

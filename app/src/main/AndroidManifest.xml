@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -43,7 +44,6 @@
             android:name=".Drawer_nav"
             android:label="@string/title_activity_drawer_nav"
             android:theme="@style/AppTheme" />
-        <activity android:name=".choosetrain" />
         <activity
             android:name=".MainActivity"
             android:parentActivityName=".MainActivity" />

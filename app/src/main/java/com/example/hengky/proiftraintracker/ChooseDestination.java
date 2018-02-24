@@ -9,6 +9,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+
 public class ChooseDestination extends AppCompatActivity {
 
     @Override
@@ -21,10 +27,10 @@ public class ChooseDestination extends AppCompatActivity {
         textView.setText(message);
 
         String[]list_stasiun = getResources().getStringArray(R.array.list_stasiun_argo_wilis);
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_start_wilis);
+        Spinner spinner1 = (Spinner) findViewById(R.id.spinner_start_wilis);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list_stasiun);
-        spinner.setAdapter(adapter);
+        spinner1.setAdapter(adapter);
 
         Spinner spinner2 = (Spinner) findViewById(R.id.spinner_end_wilis);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,

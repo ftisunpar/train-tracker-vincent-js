@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "710836283310-m4p2i35rrprkf6j6lam1toht9ga8f5la.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hengky.proiftraintracker",
+            "certificate_hash": "9eb9b15d129253e6283294945259d07a12731e1c"
+          }
+        },
+        {
           "client_id": "710836283310-qr9kctdubngu21q54vpfllqgbaun69k0.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "710836283310-qr9kctdubngu21q54vpfllqgbaun69k0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
