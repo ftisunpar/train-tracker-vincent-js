@@ -3,7 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="ukuran_sign_up">85dp</dimen>
-    <dimen name="ukuran_logo">100dp</dimen>
+    <dimen name="ukuran_logo">200dp</dimen>
     <dimen name="margin_bottom">20dp</dimen>
     <dimen name="margin_top_sign_up">130dp</dimen>
 

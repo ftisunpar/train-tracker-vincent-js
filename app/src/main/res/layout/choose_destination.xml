@@ -42,42 +42,40 @@
     <Spinner
 
         android:id="@+id/spinner_start_wilis"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/start_wilis"
-        android:layout_marginTop="@dimen/margin_antar_element"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/start_wilis" />
 
     <Spinner
         android:id="@+id/spinner_end_wilis"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/end_wilis"
-        android:layout_marginTop="@dimen/margin_antar_element"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="37dp" />
 
     <Button
         android:id="@+id/btn_go"
+        style="@style/ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/margin_antar_element"
-        android:text="@string/GO"
-        style="@style/ButtonStyle"
+        android:layout_alignStart="@+id/btnOpenMap"
+        android:layout_below="@+id/spinner_end_wilis"
+        android:layout_marginTop="35dp"
         android:background="@drawable/rounded_button"
-        android:layout_below="@id/spinner_end_wilis"
-        android:onClick="moveToTripPage"/>
+        android:onClick="moveToTripPage"
+        android:text="@string/GO" />
 
     <Button
         android:id="@+id/btnOpenMap"
         style="@style/ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_button"
-        android:layout_below="@id/btn_go"
+        android:layout_below="@+id/btn_go"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/jarak_antar_button"
+        android:layout_marginTop="33dp"
+        android:background="@drawable/rounded_button"
         android:onClick="openMap"
         android:text="@string/openMap" />
 
