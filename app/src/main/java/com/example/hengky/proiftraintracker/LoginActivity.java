@@ -279,6 +279,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailView.setAdapter(adapter);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    public void TestClick(View view) {
+        setContentView(R.layout.activity_login);
+    }
+
 
     private interface ProfileQuery {
         String[] PROJECTION = {
