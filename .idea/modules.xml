@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Lenovo Iyoss\Documents\GitHub\train-tracker-vincent-js\app\app.iml" filepath="C:\Users\Lenovo Iyoss\Documents\GitHub\train-tracker-vincent-js\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/train-tracker-vincent-js.iml" filepath="$PROJECT_DIR$/train-tracker-vincent-js.iml" />
-      <module fileurl="file://C:\Users\Lenovo Iyoss\Documents\GitHub\train-tracker-vincent-js\train-tracker-vincent-js.iml" filepath="C:\Users\Lenovo Iyoss\Documents\GitHub\train-tracker-vincent-js\train-tracker-vincent-js.iml" />
     </modules>
   </component>
 </project>
