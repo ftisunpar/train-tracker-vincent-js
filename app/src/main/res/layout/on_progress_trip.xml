@@ -54,12 +54,8 @@
                 android:gravity="center"
                 android:id="@+id/namaJalan"
                 />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/namaJalan"
-                android:textColor="@color/white"
-                android:text="SPEED"/>
+
+
         </LinearLayout>
 
         <ImageView
