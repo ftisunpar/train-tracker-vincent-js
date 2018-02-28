@@ -1,35 +1,43 @@
 {
   "project_info": {
-    "project_number": "710836283310",
-    "firebase_url": "https://train-tracker-a33e7.firebaseio.com",
-    "project_id": "train-tracker-a33e7",
-    "storage_bucket": "train-tracker-a33e7.appspot.com"
+    "project_number": "611359982945",
+    "firebase_url": "https://train-tracker-vincent-js.firebaseio.com",
+    "project_id": "train-tracker-vincent-js",
+    "storage_bucket": "train-tracker-vincent-js.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:710836283310:android:58bcf8ae9a3dd30b",
+        "mobilesdk_app_id": "1:611359982945:android:58bcf8ae9a3dd30b",
         "android_client_info": {
           "package_name": "com.example.hengky.proiftraintracker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "710836283310-m4p2i35rrprkf6j6lam1toht9ga8f5la.apps.googleusercontent.com",
+          "client_id": "611359982945-2t191s5chdl8pqjglmo3l5a53h7su93t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.hengky.proiftraintracker",
-            "certificate_hash": "9eb9b15d129253e6283294945259d07a12731e1c"
+            "certificate_hash": "0c2e8f12da21a3150c7b9e8a06bdcf83083330e8"
           }
         },
         {
-          "client_id": "710836283310-qr9kctdubngu21q54vpfllqgbaun69k0.apps.googleusercontent.com",
+          "client_id": "611359982945-976rg1qut9sjddcgac4kf8qqtfcb46qm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hengky.proiftraintracker",
+            "certificate_hash": "4cad1f6dea2cd3be744f003b4ad73be2f8226e0e"
+          }
+        },
+        {
+          "client_id": "611359982945-s0qjd1gpppkhukrac7gg5vi2ts1eau01.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDJ6ocWD6lfRH4CYmXikCAxxBKjIdM12R4"
+          "current_key": "AIzaSyC3oePu0UlbiKn_GyxfSJlk8ZN9FN76SFs"
         }
       ],
       "services": {
@@ -40,7 +48,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "710836283310-qr9kctdubngu21q54vpfllqgbaun69k0.apps.googleusercontent.com",
+              "client_id": "611359982945-s0qjd1gpppkhukrac7gg5vi2ts1eau01.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
