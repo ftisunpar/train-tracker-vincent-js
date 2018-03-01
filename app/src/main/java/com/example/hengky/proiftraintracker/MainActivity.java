@@ -24,12 +24,12 @@ import ir.mirrajabi.searchdialog.core.Searchable;
  * Created by Lenovo Iyoss on 10/02/2018.
  */
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("listKereta");
 
     ArrayList<String> List = new ArrayList<>();
-    private Button sendData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-        this.sendData = this.findViewById(R.id.tes);
-        this.sendData.setOnClickListener(this);
 
         findViewById(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,14 +68,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    @Override
-    public void onClick(View view) {
-        if(view == sendData){
-            DatabaseReference mRefChild = rootRef.child("Name");
-
-            mRefChild.setValue("Yosua");
-        }
-    }
 
     private ArrayList<SearchModel> getData(){
         ArrayList<SearchModel> list = new ArrayList<>();
