@@ -1,17 +1,28 @@
 package com.example.hengky.proiftraintracker;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.Manifest;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import static android.app.NotificationManager.*;
 
 /**
  * Created by Hengky on 2/10/2018.
@@ -20,6 +31,7 @@ import android.widget.TextView;
 public class OnProgress extends AppCompatActivity implements LocationListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.setNotification();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.on_progress_trip);
 
@@ -41,6 +53,63 @@ public class OnProgress extends AppCompatActivity implements LocationListener {
         TextView distance = (TextView) this.findViewById(R.id.distance);
         double disRes = this.calculateDistance(6.9142638, 107.6023507 , -7.265422,112.751889 );
         distance.setText(String.format("%.2f", disRes)+" km");
+    }
+
+    public void setNotification(){
+        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            // Create the NotificationChannel, but only on API 26+ because
+            // the NotificationChannel class is new and not in the support library
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            String Channel_ID = "com.example.hengky.proiftraintracker";
+            int importance = IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(Channel_ID, name, importance);
+            channel.setDescription(description);
+            channel.enableLights(true);
+            channel.setLightColor(Color.RED);
+            channel.setShowBadge(true);
+            channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+            // Register the channel with the system
+            nm.createNotificationChannel(channel);
+
+            Intent intent = new Intent(this, OnProgress.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, Channel_ID)
+                    .setSmallIcon(R.drawable.train_icon)
+                    .setContentTitle("Train Tracker")
+                    .setContentText("Anda akan memulai perjalanan")
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText("Anda akan memulai perjalanan"))
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true);
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            int notificationId = 123456;
+            notificationManager.notify(notificationId, mBuilder.build());
+        }
+        else{
+            Intent intent = new Intent(this, OnProgress.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+                    .setSmallIcon(R.drawable.train_icon)
+                    .setContentTitle("Train Tracker")
+                    .setContentText("Anda akan memulai perjalanan")
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText("Anda akan memulai perjalanan"))
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true);
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            int notificationId = 123456;
+            notificationManager.notify(notificationId, mBuilder.build());
+        }
+
     }
 
 
