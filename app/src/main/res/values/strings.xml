@@ -182,6 +182,4 @@
     <string name="stasiun_tujuan">Stasiun Tujuan</string>
     <string name="stasiun_asal">Stasiun Asal</string>
     <string name="initial_speed"> 0.0 m/s </string>
-    <string name="channel_name">Notification</string>
-    <string name="channel_description">Notifikasi ketika sudah mendekati tujuan</string>
 </resources>

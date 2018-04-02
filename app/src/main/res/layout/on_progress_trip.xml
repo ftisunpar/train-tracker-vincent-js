@@ -48,11 +48,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/jarak"
-                android:text="Bandung"
+                android:text="Gambir"
                 android:textColor="@color/white"
                 android:textSize="@dimen/jarak_size"
                 android:gravity="center"
-                android:id="@+id/namaKota"
+                android:id="@+id/namaJalan"
                 />
 
 
@@ -69,30 +69,10 @@
 
     </RelativeLayout>
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/judulHistory"
-        android:text="History"
-        android:layout_below="@id/info"
-        android:textSize="30dp"
-        android:gravity="center"/>
-
-
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/judulHistory"
-        android:layout_above="@+id/distance">
-    </ListView>
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Time Estimation : 12 h 6 m"
+            android:text="Time Estimation "
             android:gravity="center"
             android:paddingTop="10dp"
             android:id="@+id/TimeE"
@@ -103,11 +83,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""
+            android:text="17 m "
             android:gravity="center"
             android:paddingTop="10dp"
             android:layout_above="@id/TimeE"
-            android:id="@+id/distance"
+            android:id="@+id/TimeR"
             />
 
         <TextView
