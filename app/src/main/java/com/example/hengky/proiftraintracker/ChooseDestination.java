@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,20 +18,49 @@ import android.Manifest;
 import android.widget.Toast;
 
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 
 public class ChooseDestination extends AppCompatActivity implements  View.OnClickListener{
     private static final int MY_PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 10;
     Button buttonMap, buttonGo;
+    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("ListKereta").child("argo wilis");
+    ArrayList<String> List = new ArrayList<>();
+    Map<String, Object> map;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_destination);
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    map = (Map<String, Object>) ds.getValue();
+                    Log.d("-------------------", "Value is: " + "oke mantab");
+
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                List.add("gagal");
+            }
+        };
+        rootRef.addValueEventListener(eventListener);
+
+
         TextView textView = findViewById(R.id.argo_wilis);
         textView.setText(message);
 
