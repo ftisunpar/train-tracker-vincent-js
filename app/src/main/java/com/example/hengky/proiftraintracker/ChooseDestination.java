@@ -22,7 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class ChooseDestination extends AppCompatActivity {
+public class ChooseDestination extends AppCompatActivity implements  View.OnClickListener{
     private static final int MY_PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 10;
     Button buttonMap, buttonGo;
     @Override
@@ -35,33 +35,43 @@ public class ChooseDestination extends AppCompatActivity {
         textView.setText(message);
 
         String[]list_stasiun = getResources().getStringArray(R.array.list_stasiun_argo_wilis);
-        Spinner spinner1 = (Spinner) findViewById(R.id.spinner_start_wilis);
+        Spinner spinner1 = this.findViewById(R.id.spinner_start_wilis);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list_stasiun);
         spinner1.setAdapter(adapter);
 
-        Spinner spinner2 = (Spinner) findViewById(R.id.spinner_end_wilis);
+        Spinner spinner2 =this.findViewById(R.id.spinner_end_wilis);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list_stasiun);
         spinner2.setAdapter(adapter2);
         reqPermission();
 
-        buttonMap = (Button) findViewById(R.id.btnOpenMap);
-        buttonGo = (Button) findViewById(R.id.btn_go);
+        buttonMap = this.findViewById(R.id.btnOpenMap);
+        buttonGo = this.findViewById(R.id.btn_go);
 
-        buttonMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openMap(view);
+//        buttonMap.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openMap(view);
+//
+//            }
+//        });
+//        buttonGo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                moveToTripPage(view);
+//            }
+//        });
+    }
 
-            }
-        });
-        buttonGo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                moveToTripPage(view);
-            }
-        });
+    @Override
+    public void onClick(View view) {
+        if (view.getId()==buttonGo.getId()){
+            moveToTripPage(view);
+        }
+        else if(view.getId()==buttonMap.getId()){
+            openMap(view);
+        }
     }
 
     private void reqPermission(){
@@ -118,4 +128,5 @@ public class ChooseDestination extends AppCompatActivity {
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
+
 }

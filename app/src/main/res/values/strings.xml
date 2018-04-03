@@ -73,10 +73,13 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="INTRODUCTION">Welcome to Train Tracker App</string>
+    <!--Main Menu String -->
+    <string name="INTRODUCTION">Train Tracker </string>
     <string name="introteam">Dibuat untuk Tugas Proyek Informatika</string>
     <string name="next">NEXT</string>
     <string name="choose_train">Choose Your Train</string>
+
+    <!-- List Kereta -->
     <string-array name="list_kereta">
         <item>Argo Wilis</item>
         <item>Argo Parahyangan</item>

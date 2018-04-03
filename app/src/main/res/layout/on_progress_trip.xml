@@ -26,8 +26,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/jarak"
-                android:text="2,5 Km"
+                android:id="@+id/velocity"
+                android:text="@string/initial_speed"
                 android:textColor="@color/white"
                 android:textSize="@dimen/jarak_size"
                 android:gravity="center"
@@ -54,12 +54,8 @@
                 android:gravity="center"
                 android:id="@+id/namaJalan"
                 />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/namaJalan"
-                android:textColor="@color/white"
-                android:text="SPEED"/>
+
+
         </LinearLayout>
 
         <ImageView
@@ -72,10 +68,6 @@
 
 
     </RelativeLayout>
-
-
-
-
 
         <TextView
             android:layout_width="match_parent"
@@ -112,14 +104,15 @@
             android:layout_marginTop="20dp"
             />
 
-        <TextView
-            android:id="@+id/velocity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/info"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="19dp"
-            android:text="@string/initial_speed" />
+        <!--<TextView-->
+            <!--android:id="@+id/velocity"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/info"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="19dp"-->
+            <!--android:text="@string/initial_speed"-->
+            <!--android:textSize="@dimen/ukuran_judul_notif"/>-->
 
 
 </RelativeLayout>

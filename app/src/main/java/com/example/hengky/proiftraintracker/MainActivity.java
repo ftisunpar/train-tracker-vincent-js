@@ -2,19 +2,20 @@ package com.example.hengky.proiftraintracker;
 
 import android.os.Bundle;
 import android.content.Intent;
-import android.service.chooser.ChooserTargetService;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.widget.Filter;
-import android.widget.Toast;
+import android.widget.Button;
 
-import com.ajithvgiri.searchdialog.*;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import ir.mirrajabi.searchdialog.SimpleSearchDialogCompat;
-import ir.mirrajabi.searchdialog.SimpleSearchFilter;
 import ir.mirrajabi.searchdialog.core.BaseSearchDialogCompat;
 import ir.mirrajabi.searchdialog.core.SearchResultListener;
 import ir.mirrajabi.searchdialog.core.Searchable;
@@ -25,10 +26,33 @@ import ir.mirrajabi.searchdialog.core.Searchable;
 
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("listKereta");
+
+    ArrayList<String> List = new ArrayList<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String name = ds.getValue(String.class);
+                    List.add(name);
+                    Log.d("-------------------", name);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                List.add("gagal");
+            }
+        };
+        rootRef.addValueEventListener(eventListener);
+
+
+
 
         findViewById(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,10 +67,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
     private ArrayList<SearchModel> getData(){
         ArrayList<SearchModel> list = new ArrayList<>();
-        String[] some_array = getResources().getStringArray(R.array.list_kereta);
-        for (int i = 0; i < getResources().getStringArray(R.array.list_kereta).length; i++){
+        String[] some_array = new String[List.size()];
+        for (int i=0 ; i<List.size();i++){
+            some_array[i]=List.get(i);
+        }
+        for (int i = 0; i < some_array.length; i++){
             SearchModel model = new SearchModel(some_array[i]);
             list.add(model);
         }
@@ -55,14 +84,19 @@ public class MainActivity extends AppCompatActivity {
         return list;
     }
 
-    private ArrayList<SampleSearchModel> createSampleData(){
-        ArrayList<SampleSearchModel> items = new ArrayList<>();
-        String[] some_array = getResources().getStringArray(R.array.list_kereta);
-        for (int i = 0; i < getResources().getStringArray(R.array.list_kereta).length; i++){
-            SampleSearchModel searchModel = new SampleSearchModel(some_array[i]);
-            items.add(searchModel);
+    private ArrayList<SearchModel> createSampleData(){
+        ArrayList<SearchModel> list = new ArrayList<>();
+        String[] some_array = new String[List.size()];
+        for (int i=0 ; i<List.size();i++){
+            some_array[i]=List.get(i);
         }
-        return items;
+        for (int i = 0; i < some_array.length; i++){
+            SearchModel model = new SearchModel(some_array[i]);
+            list.add(model);
+        }
+
+
+        return list;
     }
     public void moveToAnotherActivity(String train){
         Intent intent = new Intent(this, ChooseDestination.class);
