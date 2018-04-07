@@ -38,6 +38,8 @@ import static com.example.hengky.proiftraintracker.R.id.spinner_start_wilis;
 
 public class ChooseDestination extends AppCompatActivity implements  View.OnClickListener{
     private static final int MY_PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 10;
+    private static final int MY_PERMISSION_REQUEST_ACCESS_INTERNET = 10;
+    private static final int MY_PERMISSION_REQUEST_ACCESS_WRITE_SETTINGS = 10;
     Button buttonMap, buttonGo;
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("ListKereta").child("argo wilis");
     ArrayList<String> List = new ArrayList<>();
