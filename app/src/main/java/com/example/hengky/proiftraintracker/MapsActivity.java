@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
@@ -30,7 +32,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import static android.graphics.Color.BLUE;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener,LocationListener {
+public class MapsActivity extends FragmentActivity implements FragmentListener,OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener,LocationListener {
 
     private GoogleMap mMap;
     GoogleApiClient mGoogleApiClient;
@@ -38,7 +40,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Location mLastLocation;
     Marker mCurrLocationMarker;
     Polyline polyline;
-
+    FragmentManager fragmentManager;
+    GMapFragment gMapFragment;
+    ProgressFragment progressFragment;
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION=99;
 
@@ -46,10 +50,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+
+        gMapFragment = GMapFragment.newInstance("fragment 1");
+        progressFragment = ProgressFragment.newInstance("fragment 2");
+
+        this.fragmentManager = this.getSupportFragmentManager();
+        FragmentTransaction ft = this.fragmentManager.beginTransaction();
+        ft.add(R.id.frame_container,progressFragment);
+        ft.add(R.id.frame_container,gMapFragment);
+        ft.commit();
 
     }
 
@@ -174,5 +183,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
         polyline.remove();
+    }
+
+    @Override
+    public void changePage() {
+
     }
 }
