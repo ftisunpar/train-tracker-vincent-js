@@ -8,7 +8,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -17,39 +19,103 @@ import android.Manifest;
 import android.widget.Toast;
 
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import static com.example.hengky.proiftraintracker.R.id.spinner_start_wilis;
 
 
 public class ChooseDestination extends AppCompatActivity implements  View.OnClickListener{
     private static final int MY_PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 10;
     Button buttonMap, buttonGo;
+    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("ListKereta").child("argo wilis");
+    ArrayList<String> List = new ArrayList<>();
+    HashMap<String,Object> map= new HashMap<>();
     private String awal;
     private String akhir;
+    Spinner spinner1;
+    Spinner spinner2;
+    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> adapter2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_destination);
+        ValueEventListener eventListener = new ValueEventListener() {
+
+            @Override
+
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot dss : dataSnapshot.getChildren()) {
+                    String namaKota=dss.getKey();
+                    List.add(namaKota);
+                    map.put(namaKota,dss.getValue());
+                    Log.d("-----------------",""+ namaKota);
+                    Log.d("-----------------",""+ dss.child("longitude").getValue());
+                    Log.d("-----------------",""+ dss.child("latitude").getValue());
+                    Log.d("-----------------",""+ map.get(namaKota));
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                List.add("gagal");
+            }
+        };
+        rootRef.addValueEventListener(eventListener);
+
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         TextView textView = findViewById(R.id.argo_wilis);
         textView.setText(message);
 
-        String[]list_stasiun = getResources().getStringArray(R.array.list_stasiun_argo_wilis);
-        Spinner spinner1 = this.findViewById(R.id.spinner_start_wilis);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list_stasiun);
+
+        String[] some_array = new String[4];
+        for (int i=0 ; i<some_array.length;i++){
+            some_array[i]=i+"";
+        }
+
+        String[]list_stasiun = some_array;
+        spinner1 = this.findViewById(spinner_start_wilis);
+
+         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,some_array );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter);
 
-        Spinner spinner2 =this.findViewById(R.id.spinner_end_wilis);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list_stasiun);
+        spinner2 =(Spinner)this.findViewById(R.id.spinner_end_wilis);
+        adapter2 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, List);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
         reqPermission();
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                awal = spinner1.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         buttonMap = this.findViewById(R.id.btnOpenMap);
         buttonGo = this.findViewById(R.id.btn_go);
+
+        buttonGo.setOnClickListener(this);
+        buttonMap.setOnClickListener(this);
 
 //        buttonMap.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -66,10 +132,10 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
 //        });
     }
 
-
     @Override
     public void onClick(View view) {
         if (view.getId()==buttonGo.getId()){
+
             moveToTripPage(view);
         }
         else if(view.getId()==buttonMap.getId()){
@@ -124,6 +190,9 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
 
     public void moveToTripPage(View view){
         Intent intent = new Intent(this, OnProgress.class);
+        Log.d("-----------------",""+ awal);
+        intent.putExtra("asal",awal);
+        intent.putExtra("tujuan",akhir);
         startActivity(intent);
     }
 
@@ -131,5 +200,6 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
+
 
 }
