@@ -34,13 +34,19 @@ public class OnProgress extends AppCompatActivity implements LocationListener {
     private double distance;
     private double timeEstimation;
     private double currentSpeed;
+    private TextView namaKota;
+    String asal;
+    String tujuan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.setNotification();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.on_progress_trip);
-
+        Intent i= getIntent();
+        asal=i.getStringExtra("asal");
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        namaKota = this.findViewById(R.id.namaKota);
+        namaKota.setText(asal);
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

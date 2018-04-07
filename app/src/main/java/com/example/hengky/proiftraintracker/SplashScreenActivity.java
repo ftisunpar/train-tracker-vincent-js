@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.view.Window;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class SplashScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        ListKota lk=new ListKota();
+        ArrayList<String> List = lk.getKota();
             super.onCreate(savedInstanceState);
 
             //menghilangkan ActionBar

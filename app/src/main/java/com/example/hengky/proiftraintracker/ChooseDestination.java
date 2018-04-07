@@ -41,9 +41,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
     private static final int MY_PERMISSION_REQUEST_ACCESS_INTERNET = 10;
     private static final int MY_PERMISSION_REQUEST_ACCESS_WRITE_SETTINGS = 10;
     Button buttonMap, buttonGo;
-    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("ListKereta").child("argo wilis");
-    ArrayList<String> List = new ArrayList<>();
-    HashMap<String,Object> map= new HashMap<>();
+    ArrayList<String> List;
     private String awal;
     private String akhir;
     Spinner spinner1;
@@ -54,28 +52,8 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_destination);
-        ValueEventListener eventListener = new ValueEventListener() {
-
-            @Override
-
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot dss : dataSnapshot.getChildren()) {
-                    String namaKota=dss.getKey();
-                    List.add(namaKota);
-                    map.put(namaKota,dss.getValue());
-                    Log.d("-----------------",""+ namaKota);
-                    Log.d("-----------------",""+ dss.child("longitude").getValue());
-                    Log.d("-----------------",""+ dss.child("latitude").getValue());
-                    Log.d("-----------------",""+ map.get(namaKota));
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                List.add("gagal");
-            }
-        };
-        rootRef.addValueEventListener(eventListener);
-
+       ListKota lk=new ListKota();
+       List = lk.getKota();
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         TextView textView = findViewById(R.id.argo_wilis);
@@ -84,7 +62,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
 
         String[] some_array = new String[4];
         for (int i=0 ; i<some_array.length;i++){
-            some_array[i]=i+"";
+            some_array[i]="GOBLOOOOOOOOOOOOOOOOOOOOOOOOK"+i;
         }
 
         String[]list_stasiun = some_array;
@@ -100,17 +78,6 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
         reqPermission();
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                awal = spinner1.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
 
         buttonMap = this.findViewById(R.id.btnOpenMap);
@@ -192,6 +159,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
 
     public void moveToTripPage(View view){
         Intent intent = new Intent(this, OnProgress.class);
+        awal = spinner1.getSelectedItem().toString();
         Log.d("-----------------",""+ awal);
         intent.putExtra("asal",awal);
         intent.putExtra("tujuan",akhir);
