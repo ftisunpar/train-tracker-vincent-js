@@ -25,6 +25,8 @@ import java.util.List;
 public class ChooseDestination extends AppCompatActivity implements  View.OnClickListener{
     private static final int MY_PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 10;
     Button buttonMap, buttonGo;
+    private String awal;
+    private String akhir;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
 //            }
 //        });
     }
+
 
     @Override
     public void onClick(View view) {
