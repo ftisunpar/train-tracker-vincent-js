@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,32 +18,73 @@ import android.Manifest;
 import android.widget.Toast;
 
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 
 public class ChooseDestination extends AppCompatActivity implements  View.OnClickListener{
     private static final int MY_PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 10;
     Button buttonMap, buttonGo;
+    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("ListKereta").child("argo wilis");
+     ArrayList<String> List = new ArrayList<>();
+     HashMap<String,Object> map= new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_destination);
+        ValueEventListener eventListener = new ValueEventListener() {
+
+            @Override
+
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot dss : dataSnapshot.getChildren()) {
+                    String namaKota=dss.getKey();
+                    List.add(namaKota);
+                    map.put(namaKota,dss.getValue());
+                    Log.d("-----------------",""+ namaKota);
+                    Log.d("-----------------",""+ dss.child("longitude").getValue());
+                    Log.d("-----------------",""+ dss.child("latitude").getValue());
+                    Log.d("-----------------",""+ map.get(namaKota));
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                List.add("gagal");
+            }
+        };
+        rootRef.addValueEventListener(eventListener);
+
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         TextView textView = findViewById(R.id.argo_wilis);
         textView.setText(message);
 
-        String[]list_stasiun = getResources().getStringArray(R.array.list_stasiun_argo_wilis);
+
+        String[] some_array = new String[List.size()];
+        for (int i=0 ; i<List.size();i++){
+            some_array[i]=List.get(i);
+        }
+
+        String[]list_stasiun = some_array;
         Spinner spinner1 = this.findViewById(R.id.spinner_start_wilis);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list_stasiun);
+                android.R.layout.simple_spinner_item, List);
         spinner1.setAdapter(adapter);
 
         Spinner spinner2 =this.findViewById(R.id.spinner_end_wilis);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list_stasiun);
+                android.R.layout.simple_spinner_item, List);
         spinner2.setAdapter(adapter2);
         reqPermission();
 

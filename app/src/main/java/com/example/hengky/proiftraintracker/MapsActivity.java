@@ -50,8 +50,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        //add latitude di sini
-        polyline=new Polyline(new PolylineOptions().add().add().color(BLUE).width(25));
+
     }
 
 
@@ -175,7 +174,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
         polyline.remove();
-        // isi add latitude di sebelahnya
-        polyline=new Polyline(new PolylineOptions().add(latLng).add().color(BLUE).width(25));
     }
 }
