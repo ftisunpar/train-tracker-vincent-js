@@ -14,6 +14,8 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.Manifest;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -113,7 +115,14 @@ public class OnProgress extends AppCompatActivity implements LocationListener {
             int notificationId = 123456;
             notificationManager.notify(notificationId, mBuilder.build());
         }
-
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(500,VibrationEffect.DEFAULT_AMPLITUDE));
+        }else{
+            //deprecated in API 26
+            v.vibrate(500);
+        }
     }
 
 

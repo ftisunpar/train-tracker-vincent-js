@@ -24,6 +24,8 @@ import java.util.List;
 
 public class ChooseDestination extends AppCompatActivity implements  View.OnClickListener{
     private static final int MY_PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 10;
+    private static final int MY_PERMISSION_REQUEST_ACCESS_INTERNET = 10;
+    private static final int MY_PERMISSION_REQUEST_ACCESS_WRITE_SETTINGS = 10;
     Button buttonMap, buttonGo;
     private String awal;
     private String akhir;
