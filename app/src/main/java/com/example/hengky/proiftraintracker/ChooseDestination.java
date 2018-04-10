@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ import java.util.Map;
 
 public class ChooseDestination extends AppCompatActivity implements  View.OnClickListener{
     private static final int MY_PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 10;
-    Button buttonMap, buttonGo;
+    Button buttonMap;
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("ListKereta").child("argo wilis");
      ArrayList<String> List = new ArrayList<>();
      HashMap<String,Object> map= new HashMap<>();
@@ -89,29 +90,12 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         reqPermission();
 
         buttonMap = this.findViewById(R.id.btnOpenMap);
-        buttonGo = this.findViewById(R.id.btn_go);
 
-//        buttonMap.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                openMap(view);
-//
-//            }
-//        });
-//        buttonGo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                moveToTripPage(view);
-//            }
-//        });
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId()==buttonGo.getId()){
-            moveToTripPage(view);
-        }
-        else if(view.getId()==buttonMap.getId()){
+       if(view.getId()==buttonMap.getId()){
             openMap(view);
         }
     }
@@ -159,11 +143,6 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
 
                 break;
         }
-    }
-
-    public void moveToTripPage(View view){
-        Intent intent = new Intent(this, OnProgress.class);
-        startActivity(intent);
     }
 
     public void openMap(View view){
