@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -31,6 +32,9 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import static android.graphics.Color.BLUE;
+import static android.graphics.Color.RED;
+
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener,LocationListener {
 
 public class MapsActivity extends FragmentActivity implements FragmentListener,OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener,LocationListener {
 
@@ -77,8 +81,6 @@ public class MapsActivity extends FragmentActivity implements FragmentListener,O
         mMap = googleMap;
         // Add a marker in Bandung and move the camera
         //LatLng sydney = new LatLng(-6.875104, 107.605011);
-
-
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
@@ -108,6 +110,16 @@ public class MapsActivity extends FragmentActivity implements FragmentListener,O
         }
          */
         mMap.setMyLocationEnabled(true);
+        LatLng awal = new LatLng(-7.0273, 107.5201);
+        LatLng akhir = new LatLng(-7.265422,112.751889);
+        polyline = googleMap.addPolyline(new PolylineOptions().clickable(true).color(RED).add(
+                        awal,akhir));
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(awal);
+        markerOptions.title("Current Position");
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+        mCurrLocationMarker = mMap.addMarker(markerOptions);
+
     }
 
     protected synchronized void buildGoogleApiClient() {
