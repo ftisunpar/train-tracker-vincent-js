@@ -10,14 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.Manifest;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
+
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,30 +34,16 @@ import java.util.List;
 import java.util.Map;
 
 
-import static com.example.hengky.proiftraintracker.R.id.spinner_start_wilis;
-
-
-
-
 public class ChooseDestination extends AppCompatActivity implements  View.OnClickListener{
     private static final int MY_PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 10;
-    private static final int MY_PERMISSION_REQUEST_ACCESS_INTERNET = 10;
-    private static final int MY_PERMISSION_REQUEST_ACCESS_WRITE_SETTINGS = 10;
-    Button buttonMap, buttonGo;
-
+    Button buttonMap;
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("ListKereta").child("argo wilis");
     ArrayList<String> List = new ArrayList<>();
     HashMap<String,Object> map= new HashMap<>();
-    String asal;
-    String tujuan;
-    Spinner spinner1;
-    Spinner spinner2;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_destination);
-
         ValueEventListener eventListener = new ValueEventListener() {
 
             @Override
@@ -81,12 +66,10 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         };
         rootRef.addValueEventListener(eventListener);
 
-
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         TextView textView = findViewById(R.id.argo_wilis);
         textView.setText(message);
-
 
 
         String[] some_array = new String[List.size()];
@@ -95,46 +78,24 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         }
 
         String[]list_stasiun = some_array;
-        spinner1 = this.findViewById(R.id.spinner_start_wilis);
+        Spinner spinner1 = this.findViewById(R.id.spinner_start_wilis);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, List);
         spinner1.setAdapter(adapter);
 
-        spinner2 =this.findViewById(R.id.spinner_end_wilis);
+        Spinner spinner2 =this.findViewById(R.id.spinner_end_wilis);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, List);
-
         spinner2.setAdapter(adapter2);
         reqPermission();
 
-
         buttonMap = this.findViewById(R.id.btnOpenMap);
 
-        buttonGo.setOnClickListener(this);
-        buttonMap.setOnClickListener(this);
-
-//        buttonMap.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                openMap(view);
-//
-//            }
-//        });
-//        buttonGo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                moveToTripPage(view);
-//            }
-//        });
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId()==buttonGo.getId()){
-
-            moveToTripPage(view);
-        }
-        else if(view.getId()==buttonMap.getId()){
+        if(view.getId()==buttonMap.getId()){
             openMap(view);
         }
     }
@@ -184,22 +145,9 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         }
     }
 
-    public void moveToTripPage(View view){
-
-
-        Intent intent = new Intent(this, OnProgress.class);
-
-        intent.putExtra("asal",asal);
-        intent.putExtra("tujuan",tujuan);
-        Log.d("-----------------",""+asal);
-
-        startActivity(intent);
-    }
-
     public void openMap(View view){
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
-
 
 }

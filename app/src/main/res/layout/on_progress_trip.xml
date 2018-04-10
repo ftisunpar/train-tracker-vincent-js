@@ -48,11 +48,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/jarak"
-                android:text="Gambir"
+                android:text="Bandung"
                 android:textColor="@color/white"
                 android:textSize="@dimen/jarak_size"
                 android:gravity="center"
-                android:id="@+id/namaJalan"
+                android:id="@+id/namaKota"
                 />
 
 
@@ -69,50 +69,50 @@
 
     </RelativeLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Time Estimation "
-            android:gravity="center"
-            android:paddingTop="10dp"
-            android:id="@+id/TimeE"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_alignParentBottom="true"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Time Estimation : 12 h 6 m"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:id="@+id/TimeE"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="17 m "
-            android:gravity="center"
-            android:paddingTop="10dp"
-            android:layout_above="@id/TimeE"
-            android:id="@+id/TimeR"
-            />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:layout_above="@id/TimeE"
+        android:id="@+id/distance"
+        />
 
-        <TextView
-            android:id="@+id/line2"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:paddingTop="5dip"
-            android:gravity="center_horizontal"
-            android:layout_above="@id/TimeE"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="20dp"
-            />
+    <TextView
+        android:id="@+id/line2"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:paddingTop="5dip"
+        android:gravity="center_horizontal"
+        android:layout_above="@id/TimeE"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        />
 
-        <!--<TextView-->
-            <!--android:id="@+id/velocity"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@+id/info"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:layout_marginTop="19dp"-->
-            <!--android:text="@string/initial_speed"-->
-            <!--android:textSize="@dimen/ukuran_judul_notif"/>-->
+    <!--<TextView-->
+    <!--android:id="@+id/velocity"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@+id/info"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_marginTop="19dp"-->
+    <!--android:text="@string/initial_speed"-->
+    <!--android:textSize="@dimen/ukuran_judul_notif"/>-->
 
 
 </RelativeLayout>

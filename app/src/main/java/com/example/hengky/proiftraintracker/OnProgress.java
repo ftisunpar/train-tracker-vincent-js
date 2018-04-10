@@ -1,47 +1,41 @@
 package com.example.hengky.proiftraintracker;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.Manifest;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import static android.app.NotificationManager.*;
 
 /**
  * Created by Hengky on 2/10/2018.
  */
 
 public class OnProgress extends AppCompatActivity implements LocationListener {
-    private double distance;
-    private double timeEstimation;
-    private double currentSpeed;
-
-    private TextView namaKota;
-    String asal;
-    String tujuan;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.setNotification();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.on_progress_trip);
 
-        Intent i= getIntent();
-
-        asal=getIntent().getExtras().getString("asal");
-        tujuan=getIntent().getExtras().getString("tujuan");
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        namaKota = this.findViewById(R.id.namaKota);
-        namaKota.setText(asal);
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -56,11 +50,8 @@ public class OnProgress extends AppCompatActivity implements LocationListener {
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         this.onLocationChanged(null);
-        TextView kotaAsal = (TextView) this.findViewById(R.id.namaKota);
-        kotaAsal.setText(asal);
         TextView distance = (TextView) this.findViewById(R.id.distance);
         double disRes = this.calculateDistance(6.9142638, 107.6023507 , -7.265422,112.751889 );
-        this.distance = disRes;
         distance.setText(String.format("%.2f", disRes)+" km");
     }
 
@@ -118,36 +109,19 @@ public class OnProgress extends AppCompatActivity implements LocationListener {
             int notificationId = 123456;
             notificationManager.notify(notificationId, mBuilder.build());
         }
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        // Vibrate for 500 milliseconds
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(500,VibrationEffect.DEFAULT_AMPLITUDE));
-        }else{
-            //deprecated in API 26
-            v.vibrate(500);
-        }
+
     }
 
 
     @Override
     public void onLocationChanged(Location location) {
         TextView txt = (TextView) this.findViewById(R.id.velocity);
-        TextView txtTime = (TextView) this.findViewById(R.id.TimeE);
         if(location==null){
             txt.setText("-.- m/s");
         }
         else{
-            double nCurrentSpeed = location.getSpeed();
-            this.currentSpeed=nCurrentSpeed;
+            float nCurrentSpeed = location.getSpeed();
             txt.setText(nCurrentSpeed + " m/s");
-            if(this.currentSpeed<8.5){
-                this.currentSpeed = 12.0;
-            }
-            this.timeEstimation = this.distance / this.timeEstimation;
-            double hours = timeEstimation /3600.0;
-            double minutes = (timeEstimation %3600) / 60.0;
-            double second = timeEstimation%60;
-            txtTime.setText(String.format("%02d h %02d m", hours, minutes));
         }
     }
 
@@ -176,8 +150,15 @@ public class OnProgress extends AppCompatActivity implements LocationListener {
         dist = Math.acos(dist);
         dist = rad2deg(dist);
         dist = dist * 60 * 1.1515;
-        return dist;
+        return (dist);
     }
 
+    private double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    private double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
+    }
 
 }
