@@ -56,25 +56,13 @@
         android:layout_marginTop="37dp" />
 
     <Button
-        android:id="@+id/btn_go"
-        style="@style/ButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/btnOpenMap"
-        android:layout_below="@+id/spinner_end_wilis"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/rounded_button"
-        android:onClick="moveToTripPage"
-        android:text="@string/GO" />
-
-    <Button
         android:id="@+id/btnOpenMap"
         style="@style/ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_go"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="33dp"
+        android:layout_marginBottom="136dp"
         android:background="@drawable/rounded_button"
         android:onClick="openMap"
         android:text="@string/openMap" />

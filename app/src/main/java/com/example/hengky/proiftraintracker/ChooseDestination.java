@@ -26,8 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-
-
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -110,7 +109,6 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
 
 
         buttonMap = this.findViewById(R.id.btnOpenMap);
-        buttonGo = this.findViewById(R.id.btn_go);
 
         buttonGo.setOnClickListener(this);
         buttonMap.setOnClickListener(this);

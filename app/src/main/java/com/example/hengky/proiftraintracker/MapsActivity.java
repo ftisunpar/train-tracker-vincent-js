@@ -37,7 +37,7 @@ import static android.graphics.Color.RED;
 
 public class MapsActivity extends FragmentActivity implements FragmentListener,OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener,LocationListener {
 
-    private GoogleMap mMap;
+    GoogleMap mMap;
     GoogleApiClient mGoogleApiClient;
     LocationRequest mLocationRequest;
     Location mLastLocation;
