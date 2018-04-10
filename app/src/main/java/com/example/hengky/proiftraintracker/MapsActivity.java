@@ -34,7 +34,6 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import static android.graphics.Color.BLUE;
 import static android.graphics.Color.RED;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener,LocationListener {
 
 public class MapsActivity extends FragmentActivity implements FragmentListener,OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener,LocationListener {
 
