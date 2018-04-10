@@ -25,15 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-<<<<<<< Updated upstream
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-=======
->>>>>>> Stashed changes
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,11 +34,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-<<<<<<< Updated upstream
+
 
 import static com.example.hengky.proiftraintracker.R.id.spinner_start_wilis;
-=======
->>>>>>> Stashed changes
+
+
 
 
 public class ChooseDestination extends AppCompatActivity implements  View.OnClickListener{
@@ -53,15 +46,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
     private static final int MY_PERMISSION_REQUEST_ACCESS_INTERNET = 10;
     private static final int MY_PERMISSION_REQUEST_ACCESS_WRITE_SETTINGS = 10;
     Button buttonMap, buttonGo;
-<<<<<<< Updated upstream
-    ArrayList<String> List;
-    private String awal;
-    private String akhir;
-    Spinner spinner1;
-    Spinner spinner2;
-    ArrayAdapter<String> adapter;
-    ArrayAdapter<String> adapter2;
-=======
+
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("ListKereta").child("argo wilis");
     ArrayList<String> List = new ArrayList<>();
     HashMap<String,Object> map= new HashMap<>();
@@ -69,15 +54,12 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
     String tujuan;
     Spinner spinner1;
     Spinner spinner2;
->>>>>>> Stashed changes
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_destination);
-<<<<<<< Updated upstream
-       ListKota lk=new ListKota();
-       List = lk.getKota();
-=======
+
         ValueEventListener eventListener = new ValueEventListener() {
 
             @Override
@@ -100,31 +82,14 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         };
         rootRef.addValueEventListener(eventListener);
 
->>>>>>> Stashed changes
+
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         TextView textView = findViewById(R.id.argo_wilis);
         textView.setText(message);
 
 
-<<<<<<< Updated upstream
-        String[] some_array = new String[4];
-        for (int i=0 ; i<some_array.length;i++){
-            some_array[i]="GOBLOOOOOOOOOOOOOOOOOOOOOOOOK"+i;
-        }
 
-        String[]list_stasiun = some_array;
-        spinner1 = this.findViewById(spinner_start_wilis);
-
-         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,some_array );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner1.setAdapter(adapter);
-
-        spinner2 =(Spinner)this.findViewById(R.id.spinner_end_wilis);
-        adapter2 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, List);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-=======
         String[] some_array = new String[List.size()];
         for (int i=0 ; i<List.size();i++){
             some_array[i]=List.get(i);
@@ -139,7 +104,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
          spinner2 =this.findViewById(R.id.spinner_end_wilis);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, List);
->>>>>>> Stashed changes
+
         spinner2.setAdapter(adapter2);
         reqPermission();
 
@@ -225,16 +190,11 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
 
 
         Intent intent = new Intent(this, OnProgress.class);
-<<<<<<< Updated upstream
-        awal = spinner1.getSelectedItem().toString();
-        Log.d("-----------------",""+ awal);
-        intent.putExtra("asal",awal);
-        intent.putExtra("tujuan",akhir);
-=======
+
         intent.putExtra("asal",asal);
         intent.putExtra("tujuan",tujuan);
         Log.d("-----------------",""+asal);
->>>>>>> Stashed changes
+
         startActivity(intent);
     }
 

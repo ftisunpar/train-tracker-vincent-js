@@ -34,28 +34,21 @@ public class OnProgress extends AppCompatActivity implements LocationListener {
     private double distance;
     private double timeEstimation;
     private double currentSpeed;
-<<<<<<< Updated upstream
+
     private TextView namaKota;
     String asal;
     String tujuan;
-=======
-    private String asal;
-    private String tujuan;
-    private double estimationToNextStation;
 
->>>>>>> Stashed changes
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.setNotification();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.on_progress_trip);
-<<<<<<< Updated upstream
+
         Intent i= getIntent();
-        asal=i.getStringExtra("asal");
-=======
+
         asal=getIntent().getExtras().getString("asal");
         tujuan=getIntent().getExtras().getString("tujuan");
->>>>>>> Stashed changes
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         namaKota = this.findViewById(R.id.namaKota);
         namaKota.setText(asal);
