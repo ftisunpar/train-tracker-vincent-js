@@ -37,55 +37,32 @@ import java.util.Map;
 public class ChooseDestination extends AppCompatActivity implements  View.OnClickListener{
     private static final int MY_PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 10;
     Button buttonMap;
-    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("ListKereta").child("argo wilis");
-    ArrayList<String> List = new ArrayList<>();
-    HashMap<String,Object> map= new HashMap<>();
+    MainActivity daftarKota;
+    ArrayList<String>listKota = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_destination);
-        ValueEventListener eventListener = new ValueEventListener() {
-
-            @Override
-
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot dss : dataSnapshot.getChildren()) {
-                    String namaKota=dss.getKey();
-                    List.add(namaKota);
-                    map.put(namaKota,dss.getValue());
-                    Log.d("-----------------",""+ namaKota);
-                    Log.d("-----------------",""+ dss.child("longitude").getValue());
-                    Log.d("-----------------",""+ dss.child("latitude").getValue());
-                    Log.d("-----------------",""+ map.get(namaKota));
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                List.add("gagal");
-            }
-        };
-        rootRef.addValueEventListener(eventListener);
 
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        TextView textView = findViewById(R.id.argo_wilis);
+        TextView textView = findViewById(R.id.nama_kereta);
         textView.setText(message);
 
+        daftarKota = new MainActivity();
+        listKota = daftarKota.getListKota();
 
-        String[] some_array = new String[List.size()];
-        for (int i=0 ; i<List.size();i++){
-            some_array[i]=List.get(i);
-        }
 
-        String[]list_stasiun = some_array;
-        Spinner spinner1 = this.findViewById(R.id.spinner_start_wilis);
+
+        Spinner spinner1 = this.findViewById(R.id.spinner_start_stasiun);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, List);
+                android.R.layout.simple_spinner_item, getListKotaArr());
         spinner1.setAdapter(adapter);
 
-        Spinner spinner2 =this.findViewById(R.id.spinner_end_wilis);
+        Spinner spinner2 =this.findViewById(R.id.spinner_end_stasiun);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, List);
+                android.R.layout.simple_spinner_item, getListKotaArr());
         spinner2.setAdapter(adapter2);
         reqPermission();
 
@@ -148,6 +125,14 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
     public void openMap(View view){
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
+    }
+
+    private String[] getListKotaArr(){
+        String[] some_array = new String[listKota.size()];
+        for (int i=0 ; i<listKota.size();i++){
+            some_array[i]=listKota.get(i);
+        }
+        return some_array;
     }
 
 }

@@ -1,40 +1,35 @@
 package com.example.hengky.proiftraintracker;
 
 
-import android.location.Location;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 
+import android.content.Intent;
+import android.graphics.Color;
+
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import android.location.LocationListener;
 
-import com.google.android.gms.common.api.GoogleApiClient;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 
-import com.google.android.gms.location.LocationRequest;
 
-import com.google.android.gms.maps.GoogleMap;
-
-import com.google.android.gms.maps.model.Marker;
-
-import com.google.android.gms.maps.model.Polyline;
+import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 
 
 public class MapsActivity extends FragmentActivity implements FragmentListener {
 
-    GoogleMap mMap;
-    GoogleApiClient mGoogleApiClient;
-    LocationRequest mLocationRequest;
-    Location mLastLocation;
-    Marker mCurrLocationMarker;
-    Polyline polyline;
     FragmentManager fragmentManager;
     GMapFragment gMapFragment;
     ProgressFragment progressFragment;
-    OnProgress onProgress;
-
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION=99;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +49,72 @@ public class MapsActivity extends FragmentActivity implements FragmentListener {
 
     @Override
     public void changePage() {
+
+    }
+
+    @Override
+    public void setNotification() {
+        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            // Create the NotificationChannel, but only on API 26+ because
+            // the NotificationChannel class is new and not in the support library
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            String Channel_ID = "com.example.hengky.proiftraintracker";
+            int importance = IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(Channel_ID, name, importance);
+            channel.setDescription(description);
+            channel.enableLights(true);
+            channel.setLightColor(Color.RED);
+            channel.setShowBadge(true);
+            channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+            // Register the channel with the system
+            nm.createNotificationChannel(channel);
+
+            Intent intent = new Intent();
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, Channel_ID)
+                    .setSmallIcon(R.drawable.train_icon)
+                    .setContentTitle("Train Tracker")
+                    .setContentText("Anda akan memulai perjalanan")
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText("Anda akan memulai perjalanan"))
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true);
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            int notificationId = 123456;
+            notificationManager.notify(notificationId, mBuilder.build());
+        }
+        else{
+            Intent intent = new Intent();
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+                    .setSmallIcon(R.drawable.train_icon)
+                    .setContentTitle("Train Tracker")
+                    .setContentText("Anda akan memulai perjalanan")
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText("Anda akan memulai perjalanan"))
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true);
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            int notificationId = 123456;
+            notificationManager.notify(notificationId, mBuilder.build());
+        }
+        Vibrator v = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(500,VibrationEffect.DEFAULT_AMPLITUDE));
+        }else{
+            //deprecated in API 26
+            v.vibrate(500);
+        }
 
     }
 

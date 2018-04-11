@@ -36,11 +36,23 @@
         style="@style/ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="33dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="143dp"
+        android:layout_marginStart="86dp"
         android:background="@drawable/rounded_button"
         android:text="Search Train" />
+
+    <Button
+        android:id="@+id/btn_next"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/btn_search"
+        android:layout_marginEnd="94dp"
+        android:background="@drawable/rounded_button"
+        android:text="Next" />
 
     <!--<Button-->
         <!--android:layout_width="wrap_content"-->

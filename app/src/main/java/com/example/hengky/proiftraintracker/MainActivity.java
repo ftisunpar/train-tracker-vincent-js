@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,35 +25,21 @@ import ir.mirrajabi.searchdialog.core.Searchable;
  * Created by Lenovo Iyoss on 10/02/2018.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("listKereta");
-
-    ArrayList<String> List = new ArrayList<>();
-
+    public String selectedTrain;
+    ArrayList<String> namaKereta = new ArrayList<String>();
+    SplashScreenActivity splashScreenAct;
+    private static ArrayList<String>listKota=new ArrayList<>();
+    DatabaseReference rootRef;
+    Button buttonNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.splashScreenAct = new SplashScreenActivity();
+        namaKereta = splashScreenAct.getKereta();
         setContentView(R.layout.main_page);
-        ValueEventListener eventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String name = ds.getValue(String.class);
-                    List.add(name);
-                    Log.d("-------------------", name);
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                List.add("gagal");
-            }
-        };
-        rootRef.addValueEventListener(eventListener);
-
-
-
 
         findViewById(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,47 +48,72 @@ public class MainActivity extends AppCompatActivity {
                         null, getData(), new SearchResultListener<Searchable>() {
                     @Override
                     public void onSelected(BaseSearchDialogCompat baseSearchDialogCompat, Searchable searchable, int i) {
-                        moveToAnotherActivity(searchable.getTitle());
+                        selectedTrain = searchable.getTitle();
+                        initializeFirebaseListStasiun();
+                        Toast.makeText(MainActivity.this, selectedTrain, Toast.LENGTH_LONG).show();
+                        baseSearchDialogCompat.dismiss();
                     }
+
                 }).show();
+            }
+        });
+
+        findViewById(R.id.btn_next).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(selectedTrain==null){
+                    Toast.makeText(MainActivity.this, "Silahkan pilih kereta terlebih dahulu", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    moveToAnotherActivity(selectedTrain);
+                }
             }
         });
     }
 
-
     private ArrayList<SearchModel> getData(){
         ArrayList<SearchModel> list = new ArrayList<>();
-        String[] some_array = new String[List.size()];
-        for (int i=0 ; i<List.size();i++){
-            some_array[i]=List.get(i);
+        String[] some_array = new String[namaKereta.size()];
+        for (int i=0 ; i<namaKereta.size();i++){
+            some_array[i]=namaKereta.get(i);
         }
         for (int i = 0; i < some_array.length; i++){
             SearchModel model = new SearchModel(some_array[i]);
             list.add(model);
         }
-
-
         return list;
     }
 
-    private ArrayList<SearchModel> createSampleData(){
-        ArrayList<SearchModel> list = new ArrayList<>();
-        String[] some_array = new String[List.size()];
-        for (int i=0 ; i<List.size();i++){
-            some_array[i]=List.get(i);
-        }
-        for (int i = 0; i < some_array.length; i++){
-            SearchModel model = new SearchModel(some_array[i]);
-            list.add(model);
-        }
-
-
-        return list;
-    }
     public void moveToAnotherActivity(String train){
         Intent intent = new Intent(this, ChooseDestination.class);
         intent.putExtra(EXTRA_MESSAGE, train);
         startActivity(intent);
     }
+
+    public void initializeFirebaseListStasiun(){
+        rootRef = FirebaseDatabase.getInstance().getReference(selectedTrain);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listKota.clear();
+                for(DataSnapshot dss : dataSnapshot.getChildren()) {
+                    String namaKota=dss.getValue().toString();
+                    listKota.add(namaKota);
+                    Log.d("-------------------", namaKota);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                listKota.add("gagal");
+            }
+        };
+        rootRef.addValueEventListener(eventListener);
+        //moveToAnotherActivity(selectedTrain);
+    }
+
+    public static ArrayList<String> getListKota() {
+        return listKota;
+    }
+
 
 }
