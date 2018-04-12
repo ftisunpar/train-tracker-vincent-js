@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black"
-        android:paddingBottom="10dp"
+        android:paddingBottom="20dp"
         android:id="@+id/info"
         >
 
@@ -26,6 +26,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="10dp"
                 android:id="@+id/velocity"
                 android:text="@string/initial_speed"
                 android:textColor="@color/white"
@@ -47,24 +48,36 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="10dp"
                 android:layout_below="@+id/jarak"
-                android:text="Bandung"
+                android:text="Stasiun Awal : "
                 android:textColor="@color/white"
                 android:textSize="@dimen/jarak_size"
                 android:gravity="center"
-                android:id="@+id/namaKota"
+                android:id="@+id/stasiunAwal"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:layout_below="@+id/stasiunAwal"
+                android:text="Stasiun Awal : "
+                android:textColor="@color/white"
+                android:textSize="@dimen/jarak_size"
+                android:gravity="center"
+                android:id="@+id/stasiunAkhir"
                 />
 
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/arrow"
-            android:layout_alignRight="@+id/lJarak"
-            android:layout_centerVertical="true"
-            />
+        <!--<ImageView-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:src="@drawable/arrow"-->
+            <!--android:layout_alignRight="@+id/lJarak"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--/>-->
 
 
     </RelativeLayout>
@@ -72,7 +85,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Time Estimation : 12 h 6 m"
+        android:text="Time Estimation "
         android:gravity="center"
         android:paddingTop="10dp"
         android:id="@+id/TimeE"

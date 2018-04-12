@@ -33,13 +33,14 @@ public class ProgressFragment extends Fragment implements LocationListener {
 
     private FragmentListener listener;
     MapsActivity context;
-    TextView txt;
-
+    TextView txt, awal, akhir;
+    ChooseDestination dataStasiun;
+    String stasiunAwal;
+    String stasiunAkhir;
     public ProgressFragment() {
         // Required empty public constructor
 
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,8 +48,13 @@ public class ProgressFragment extends Fragment implements LocationListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.on_progress_trip, container, false);
         this.txt = view.findViewById(R.id.velocity);
-
-
+        this.awal = view.findViewById(R.id.stasiunAwal);
+        this.akhir = view.findViewById(R.id.stasiunAkhir);
+        dataStasiun = new ChooseDestination();
+        stasiunAwal = dataStasiun.stasiunAwal;
+        stasiunAkhir = dataStasiun.stasiunAkhir;
+        awal.setText("Stasiun Awal: "+stasiunAwal);
+        akhir.setText("Stasiun Akhir: "+stasiunAkhir);
         LocationManager locationManager = (LocationManager) this.context.getSystemService(Context.LOCATION_SERVICE);
         this.context.setNotification();
         if (ActivityCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -62,7 +68,7 @@ public class ProgressFragment extends Fragment implements LocationListener {
             // for ActivityCompat#requestPermissions for more details.
             return null;
         }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
         this.onLocationChanged(null);
         TextView distance = (TextView) view.findViewById(R.id.distance);
         double disRes = this.calculateDistance(6.9142638, 107.6023507 , -7.265422,112.751889 );
@@ -78,7 +84,6 @@ public class ProgressFragment extends Fragment implements LocationListener {
         fragment.setArguments(args);
         return fragment;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -96,11 +101,12 @@ public class ProgressFragment extends Fragment implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         if(location==null){
-            txt.setText("-.- m/s");
+            txt.setText("-.- km/h");
         }
         else{
-            float nCurrentSpeed = location.getSpeed();
-            txt.setText(nCurrentSpeed + " m/s");
+            float nCurrentSpeed = (float) (location.getSpeed() * 3.6);
+
+            txt.setText(String.format("%.0f km/h", nCurrentSpeed));
         }
     }
 

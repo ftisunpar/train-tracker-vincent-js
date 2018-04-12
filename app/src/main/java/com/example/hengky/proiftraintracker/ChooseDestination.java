@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -39,6 +40,8 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
     Button buttonMap;
     MainActivity daftarKota;
     ArrayList<String>listKota = new ArrayList<>();
+    static String stasiunAwal;
+    static String stasiunAkhir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +56,36 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         daftarKota = new MainActivity();
         listKota = daftarKota.getListKota();
 
-
-
-        Spinner spinner1 = this.findViewById(R.id.spinner_start_stasiun);
+        final Spinner spinner1 = this.findViewById(R.id.spinner_start_stasiun);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, getListKotaArr());
         spinner1.setAdapter(adapter);
 
-        Spinner spinner2 =this.findViewById(R.id.spinner_end_stasiun);
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                stasiunAwal = spinner1.getSelectedItem().toString();
+                Toast.makeText(ChooseDestination.this, ("Stasiun awal : "+ stasiunAwal ), Toast.LENGTH_LONG).show();
+
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        final Spinner spinner2 =this.findViewById(R.id.spinner_end_stasiun);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, getListKotaArr());
         spinner2.setAdapter(adapter2);
+
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                stasiunAkhir = spinner2.getSelectedItem().toString();
+                Toast.makeText(ChooseDestination.this, ("Stasiun akhir : "+ stasiunAkhir ), Toast.LENGTH_LONG).show();
+
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
         reqPermission();
 
         buttonMap = this.findViewById(R.id.btnOpenMap);
@@ -117,7 +139,6 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
                                 "To enable it, go on setting -> app -> Train Tracker and grant location service permission").show();
                     }
                 }
-
                 break;
         }
     }
@@ -134,5 +155,4 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         }
         return some_array;
     }
-
 }

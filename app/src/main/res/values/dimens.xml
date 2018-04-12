@@ -23,7 +23,7 @@
     <dimen name="profile_width">75dp</dimen>
     <dimen name="profile_height">75dp</dimen>
     <dimen name="font_detail">20dp</dimen>
-    <dimen name="jarak_size">30dp</dimen>
+    <dimen name="jarak_size">20dp</dimen>
 
     <dimen name="size_dot_border">1dp</dimen>
     <dimen name="height_separator">1dp</dimen>
