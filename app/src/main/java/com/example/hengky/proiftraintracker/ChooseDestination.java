@@ -40,6 +40,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
     Button buttonMap;
     MainActivity daftarKota;
     ArrayList<String>listKota = new ArrayList<>();
+    ArrayList<String>ListlatitudeLongitude = new ArrayList<>();
     static String stasiunAwal;
     static String stasiunAkhir;
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("listStasiun");
@@ -54,8 +55,31 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         TextView textView = findViewById(R.id.nama_kereta);
         textView.setText(message);
 
+
+
         daftarKota = new MainActivity();
         listKota = daftarKota.getListKota();
+        final String [] listKota = getListKotaArr();
+        for(int i=0;i<listKota.length;i++){
+            final String kotaSekarang = listKota[i];
+            DatabaseReference rootReff = FirebaseDatabase.getInstance().getReference("ListStasiun").child(kotaSekarang);
+            ValueEventListener eventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot dss : dataSnapshot.getChildren()) {
+                        ListlatitudeLongitude.add(dss.getValue(Object.class).toString());
+                        Log.d("-----------------------",kotaSekarang );
+                       Log.d("-----------------------", dss.getValue(Object.class).toString());
+                        Log.d("-----------------------", "***********************");
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.d("-------------------", "gagal ");
+                }
+            };
+            rootReff.addValueEventListener(eventListener);
+        }
 
         final Spinner spinner1 = this.findViewById(R.id.spinner_start_stasiun);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -158,27 +182,6 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
     }
 
     public void getLangitudeLotitudeKota(){
-        final String [] listKota = getListKotaArr();
-        for(int i=0;i<listKota.length;i++){
-            final String kotaSekarang = listKota[i];
-            ValueEventListener eventListener = new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for(DataSnapshot dss : dataSnapshot.getChildren()) {
-                        String longitude= (String) dss.child(kotaSekarang).child("longitude").getValue();
-                        String latitude = (String) dss.child(kotaSekarang).child("latitude").getValue();
-                        Log.d("longitude: ", longitude);
-                        Log.d("latitude: ", latitude);
-                        System.out.println("longitude : "+longitude);
-                    }
-                }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    ;
-                }
-            };
-            rootRef.addValueEventListener(eventListener);
-        }
 
 
     }
