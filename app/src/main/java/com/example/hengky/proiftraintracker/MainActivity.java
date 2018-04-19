@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity  {
                 for(DataSnapshot dss : dataSnapshot.getChildren()) {
                     String namaKota=dss.getValue().toString();
                     listKota.add(namaKota);
-                    Log.d("-------------------", namaKota);
+                    //Log.d("-------------------", namaKota);
                 }
             }
             @Override

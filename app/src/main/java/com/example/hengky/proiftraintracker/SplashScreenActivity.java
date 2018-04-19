@@ -25,12 +25,12 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ValueEventListener eventListener = new ValueEventListener() {
-            int cnt = 0;
+            //int cnt = 0;
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot dss : dataSnapshot.getChildren()) {
-                    cnt++;
+                    //cnt++;
                     String namaKereta=dss.getValue().toString();
                     listKereta.add(namaKereta);
                     Log.d("-------------------", namaKereta);

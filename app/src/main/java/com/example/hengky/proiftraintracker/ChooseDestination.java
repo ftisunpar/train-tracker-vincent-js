@@ -42,6 +42,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
     ArrayList<String>listKota = new ArrayList<>();
     static String stasiunAwal;
     static String stasiunAkhir;
+    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("listStasiun");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +90,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         reqPermission();
 
         buttonMap = this.findViewById(R.id.btnOpenMap);
-
+        //getLangitudeLotitudeKota();
     }
 
     @Override
@@ -154,5 +155,31 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
             some_array[i]=listKota.get(i);
         }
         return some_array;
+    }
+
+    public void getLangitudeLotitudeKota(){
+        final String [] listKota = getListKotaArr();
+        for(int i=0;i<listKota.length;i++){
+            final String kotaSekarang = listKota[i];
+            ValueEventListener eventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot dss : dataSnapshot.getChildren()) {
+                        String longitude= (String) dss.child(kotaSekarang).child("longitude").getValue();
+                        String latitude = (String) dss.child(kotaSekarang).child("latitude").getValue();
+                        Log.d("longitude: ", longitude);
+                        Log.d("latitude: ", latitude);
+                        System.out.println("longitude : "+longitude);
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    ;
+                }
+            };
+            rootRef.addValueEventListener(eventListener);
+        }
+
+
     }
 }
