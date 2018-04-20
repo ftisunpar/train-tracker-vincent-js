@@ -40,10 +40,12 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
     Button buttonMap;
     MainActivity daftarKota;
     ArrayList<String>listKota = new ArrayList<>();
-    ArrayList<String>ListlatitudeLongitude = new ArrayList<>();
+    ArrayList<String> latitude= new ArrayList<>();;
+    ArrayList<String> longitude= new ArrayList<>();;
     static String stasiunAwal;
     static String stasiunAkhir;
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("listStasiun");
+    int x=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
 
         daftarKota = new MainActivity();
         listKota = daftarKota.getListKota();
+
         final String [] listKota = getListKotaArr();
         for(int i=0;i<listKota.length;i++){
             final String kotaSekarang = listKota[i];
@@ -67,7 +70,14 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for(DataSnapshot dss : dataSnapshot.getChildren()) {
-                        ListlatitudeLongitude.add(dss.getValue(Object.class).toString());
+                        if((x%2)==0){
+                            latitude.add(dss.getValue(Object.class).toString());
+
+                        }
+                        else{
+                            longitude.add(dss.getValue(Object.class).toString());
+                        }
+                        x++;
                         Log.d("-----------------------",kotaSekarang );
                        Log.d("-----------------------", dss.getValue(Object.class).toString());
                         Log.d("-----------------------", "***********************");
