@@ -47,6 +47,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/start_stasiun" />
 
+
     <Spinner
         android:id="@+id/spinner_end_stasiun"
         android:layout_width="wrap_content"

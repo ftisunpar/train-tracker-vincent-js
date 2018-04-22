@@ -1,8 +1,15 @@
 package com.example.hengky.proiftraintracker;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.content.Context;
@@ -12,6 +19,8 @@ import android.support.annotation.Nullable;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +43,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+
+import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 
 
 public class GMapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener,LocationListener{
@@ -137,19 +148,37 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
         mMap.setMyLocationEnabled(true);
 
         PolylineOptions pOptions = new PolylineOptions();
-        int curIdx = dataLongitudeLatitude.indexStasiunAwal;
 
-        double curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
-        double curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
-        LatLng curPosition= new LatLng(curLatitude, curLongitude);
 
-        for(int i=dataLongitudeLatitude.indexStasiunAwal;i<dataLongitudeLatitude.indexStasiunAkhir;i++){
-            pOptions.add(curPosition);
-            curIdx ++;
-            curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
-            curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
-            curPosition= new LatLng(curLatitude, curLongitude);
+
+        if(dataLongitudeLatitude.indexStasiunAwal < dataLongitudeLatitude.indexStasiunAkhir){
+            int curIdx = dataLongitudeLatitude.indexStasiunAwal;
+            double curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
+            double curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
+            LatLng curPosition= new LatLng(curLatitude, curLongitude);
+            for(int i=dataLongitudeLatitude.indexStasiunAwal;i<dataLongitudeLatitude.indexStasiunAkhir;i++){
+                pOptions.add(curPosition);
+                curIdx ++;
+                curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
+                curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
+                curPosition= new LatLng(curLatitude, curLongitude);
+            }
         }
+        else{
+            int curIdx = dataLongitudeLatitude.indexStasiunAwal;
+            double curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
+            double curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
+            LatLng curPosition= new LatLng(curLatitude, curLongitude);
+            for(int i=dataLongitudeLatitude.indexStasiunAwal;i>dataLongitudeLatitude.indexStasiunAkhir;i--){
+
+                pOptions.add(curPosition);
+                curIdx --;
+                curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
+                curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
+                curPosition= new LatLng(curLatitude, curLongitude);
+            }
+        }
+
         pOptions.add(koordinatAkhir);
         pOptions.width(5).color(Color.RED).geodesic(true);
         MarkerOptions mOptionAWal = new MarkerOptions().position(koordinatAwal);
@@ -180,6 +209,7 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, (LocationListener) this);
         }
     }
+
 
     @Override
     public void onConnectionSuspended(int i) {
