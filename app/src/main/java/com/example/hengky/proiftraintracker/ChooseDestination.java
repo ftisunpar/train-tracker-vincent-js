@@ -40,10 +40,12 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
     Button buttonMap;
     MainActivity daftarKota;
     ArrayList<String>listKota = new ArrayList<>();
-    ArrayList<Double> latitude= new ArrayList<>();;
-    ArrayList<Double> longitude= new ArrayList<>();;
+    static ArrayList<Double> latitude= new ArrayList<>();;
+    static ArrayList<Double> longitude= new ArrayList<>();;
     static String stasiunAwal;
     static String stasiunAkhir;
+    static int indexStasiunAwal;
+    static int indexStasiunAkhir;
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("listStasiun");
     int x=0;
 
@@ -99,6 +101,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 stasiunAwal = spinner1.getSelectedItem().toString();
+                indexStasiunAwal = spinner1.getSelectedItemPosition();
                 Toast.makeText(ChooseDestination.this, ("Stasiun awal : "+ stasiunAwal ), Toast.LENGTH_LONG).show();
 
             }
@@ -114,6 +117,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 stasiunAkhir = spinner2.getSelectedItem().toString();
+                indexStasiunAkhir = spinner2.getSelectedItemPosition();
                 Toast.makeText(ChooseDestination.this, ("Stasiun akhir : "+ stasiunAkhir ), Toast.LENGTH_LONG).show();
 
             }

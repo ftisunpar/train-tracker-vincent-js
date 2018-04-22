@@ -20,6 +20,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class ProgressFragment extends Fragment implements LocationListener {
     ChooseDestination dataStasiun;
     String stasiunAwal;
     String stasiunAkhir;
+    ChooseDestination dataLongitudeLatitude;
     public ProgressFragment() {
         // Required empty public constructor
 
@@ -53,6 +55,11 @@ public class ProgressFragment extends Fragment implements LocationListener {
         dataStasiun = new ChooseDestination();
         stasiunAwal = dataStasiun.stasiunAwal;
         stasiunAkhir = dataStasiun.stasiunAkhir;
+        dataLongitudeLatitude = new ChooseDestination();
+//        Log.d("test latitude", String.valueOf(dataLongitudeLatitude.latitude.get(dataLongitudeLatitude.latitude.size()-1)));
+//        Log.d("test longitude", String.valueOf(dataLongitudeLatitude.longitude.get(dataLongitudeLatitude.longitude.size()-1)));
+//        Log.d("test index terpilih", stasiunAwal+"-"+dataStasiun.indexStasiunAwal);
+//        Log.d("test index terpilih(2)", stasiunAkhir+"-"+dataStasiun.indexStasiunAkhir);
         awal.setText("Stasiun Awal: "+stasiunAwal);
         akhir.setText("Stasiun Akhir: "+stasiunAkhir);
         LocationManager locationManager = (LocationManager) this.context.getSystemService(Context.LOCATION_SERVICE);
@@ -101,7 +108,7 @@ public class ProgressFragment extends Fragment implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         if(location==null){
-            txt.setText("-.- km/h");
+            txt.setText("0.0 km/h");
         }
         else{
             float nCurrentSpeed = (float) (location.getSpeed() * 3.6);
@@ -146,4 +153,7 @@ public class ProgressFragment extends Fragment implements LocationListener {
         return (rad * 180.0 / Math.PI);
     }
 
+    public void progressPerjalanan(){
+
+    }
 }

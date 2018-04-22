@@ -1,6 +1,7 @@
 package com.example.hengky.proiftraintracker;
 
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 
 public class GMapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener,LocationListener{
@@ -40,7 +45,10 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
     MapsActivity context;
     Location mLastLocation;
     Marker mCurrLocationMarker;
-
+    Polyline rute;
+    ChooseDestination dataLongitudeLatitude;
+    LatLng koordinatAwal;
+    LatLng koordinatAkhir;
     public GMapFragment(){
 
     }
@@ -49,6 +57,15 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.map_fragment,container,false);
+        dataLongitudeLatitude = new ChooseDestination();
+        double longitudeAwal = dataLongitudeLatitude.longitude.get(dataLongitudeLatitude.indexStasiunAwal);
+        double latitudeAwal = dataLongitudeLatitude.latitude.get(dataLongitudeLatitude.indexStasiunAwal);
+        double longitudeAkhir = dataLongitudeLatitude.longitude.get(dataLongitudeLatitude.indexStasiunAkhir);
+        double latitudeAkhir = dataLongitudeLatitude.latitude.get(dataLongitudeLatitude.indexStasiunAkhir);
+
+        this.koordinatAwal = new LatLng(latitudeAwal, longitudeAwal);
+        this.koordinatAkhir = new LatLng(latitudeAkhir, longitudeAkhir);
+
 
         mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if(mapFragment == null){
@@ -118,6 +135,28 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
         }
          */
         mMap.setMyLocationEnabled(true);
+
+        PolylineOptions pOptions = new PolylineOptions();
+        int curIdx = dataLongitudeLatitude.indexStasiunAwal;
+
+        double curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
+        double curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
+        LatLng curPosition= new LatLng(curLatitude, curLongitude);
+
+        for(int i=dataLongitudeLatitude.indexStasiunAwal;i<dataLongitudeLatitude.indexStasiunAkhir;i++){
+            pOptions.add(curPosition);
+            curIdx ++;
+            curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
+            curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
+            curPosition= new LatLng(curLatitude, curLongitude);
+        }
+        pOptions.add(koordinatAkhir);
+        pOptions.width(5).color(Color.RED).geodesic(true);
+        MarkerOptions mOptionAWal = new MarkerOptions().position(koordinatAwal);
+        MarkerOptions mOptionAkhir = new MarkerOptions().position(koordinatAkhir);
+        mMap.addMarker(mOptionAWal);
+        mMap.addMarker(mOptionAkhir);
+        mMap.addPolyline(pOptions);
     }
 
     protected synchronized void buildGoogleApiClient() {
