@@ -117,7 +117,7 @@ public class OnProgress extends AppCompatActivity implements LocationListener {
     public void onLocationChanged(Location location) {
         TextView txt = (TextView) this.findViewById(R.id.velocity);
         if(location==null){
-            txt.setText("-.- m/s");
+            txt.setText("0.0 m/s");
         }
         else{
             float nCurrentSpeed = location.getSpeed();

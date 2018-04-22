@@ -40,8 +40,8 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
     Button buttonMap;
     MainActivity daftarKota;
     ArrayList<String>listKota = new ArrayList<>();
-    ArrayList<String> latitude= new ArrayList<>();;
-    ArrayList<String> longitude= new ArrayList<>();;
+    ArrayList<Double> latitude= new ArrayList<>();;
+    ArrayList<Double> longitude= new ArrayList<>();;
     static String stasiunAwal;
     static String stasiunAkhir;
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("listStasiun");
@@ -71,11 +71,11 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for(DataSnapshot dss : dataSnapshot.getChildren()) {
                         if((x%2)==0){
-                            latitude.add(dss.getValue(Object.class).toString());
-
+                            latitude.add(Double.parseDouble(dss.getValue(Object.class).toString()));
+                            Log.d("------------",String.valueOf(latitude.get(0)));
                         }
                         else{
-                            longitude.add(dss.getValue(Object.class).toString());
+                            longitude.add(Double.parseDouble(dss.getValue(Object.class).toString()));
                         }
                         x++;
                         Log.d("-----------------------",kotaSekarang );
