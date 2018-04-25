@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity  {
     public String selectedTrain;
     ArrayList<String> namaKereta = new ArrayList<String>();
     SplashScreenActivity splashScreenAct;
-    private static ArrayList<String>listKota=new ArrayList<>();
+    private static ArrayList<String>listStasiun=new ArrayList<>();
     DatabaseReference rootRef;
     Button buttonNext;
 
@@ -95,24 +95,24 @@ public class MainActivity extends AppCompatActivity  {
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                listKota.clear();
+                listStasiun.clear();
                 for(DataSnapshot dss : dataSnapshot.getChildren()) {
                     String namaKota=dss.getValue().toString();
-                    listKota.add(namaKota);
+                    listStasiun.add(namaKota);
                     //Log.d("-------------------", namaKota);
                 }
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                listKota.add("gagal");
+                listStasiun.add("gagal");
             }
         };
         rootRef.addValueEventListener(eventListener);
         //moveToAnotherActivity(selectedTrain);
     }
 
-    public static ArrayList<String> getListKota() {
-        return listKota;
+    public static ArrayList<String> getListStasiun() {
+        return listStasiun;
     }
 
 

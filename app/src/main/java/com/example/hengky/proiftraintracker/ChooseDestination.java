@@ -1,10 +1,12 @@
 package com.example.hengky.proiftraintracker;
 
-import android.*;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
+
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,12 +38,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
+
 
 public class ChooseDestination extends AppCompatActivity implements  View.OnClickListener{
     private static final int MY_PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 10;
     Button buttonMap;
-    MainActivity daftarKota;
-    ArrayList<String>listKota = new ArrayList<>();
+    MainActivity daftarStasiun;
+    static ArrayList<String>listStasiun = new ArrayList<>();
     static ArrayList<Double> latitude= new ArrayList<>();;
     static ArrayList<Double> longitude= new ArrayList<>();;
     static String stasiunAwal;
@@ -63,10 +67,10 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
 
 
 
-        daftarKota = new MainActivity();
-        listKota = daftarKota.getListKota();
+        daftarStasiun = new MainActivity();
+        listStasiun = daftarStasiun.getListStasiun();
 
-        final String [] listKota = getListKotaArr();
+        final String [] listKota = getListStasiunArr();
         for(int i=0;i<listKota.length;i++){
             final String kotaSekarang = listKota[i];
             DatabaseReference rootReff = FirebaseDatabase.getInstance().getReference("ListStasiun").child(kotaSekarang);
@@ -97,7 +101,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
 
         final Spinner spinner1 = this.findViewById(R.id.spinner_start_stasiun);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, getListKotaArr());
+                android.R.layout.simple_spinner_item, getListStasiunArr());
         spinner1.setAdapter(adapter);
 
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -113,7 +117,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
 
         final Spinner spinner2 =this.findViewById(R.id.spinner_end_stasiun);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, getListKotaArr());
+                android.R.layout.simple_spinner_item, getListStasiunArr());
         spinner2.setAdapter(adapter2);
 
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -189,16 +193,13 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         startActivity(intent);
     }
 
-    private String[] getListKotaArr(){
-        String[] some_array = new String[listKota.size()];
-        for (int i=0 ; i<listKota.size();i++){
-            some_array[i]=listKota.get(i);
+    private String[] getListStasiunArr(){
+        String[] some_array = new String[listStasiun.size()];
+        for (int i=0 ; i<listStasiun.size();i++){
+            some_array[i]=listStasiun.get(i);
         }
         return some_array;
     }
 
-    public void getLangitudeLotitudeKota(){
 
-
-    }
 }

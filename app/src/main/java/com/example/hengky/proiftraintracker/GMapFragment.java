@@ -186,6 +186,8 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
         mMap.addMarker(mOptionAWal);
         mMap.addMarker(mOptionAkhir);
         mMap.addPolyline(pOptions);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(koordinatAwal, 17));
+
     }
 
     protected synchronized void buildGoogleApiClient() {
