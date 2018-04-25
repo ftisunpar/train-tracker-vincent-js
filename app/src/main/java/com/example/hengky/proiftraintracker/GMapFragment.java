@@ -165,11 +165,11 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
             }
         }
         else{
-            int curIdx = dataLongitudeLatitude.indexStasiunAwal;
+            int curIdx = dataLongitudeLatitude.indexStasiunAwal - 1;
             double curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
             double curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
             LatLng curPosition= new LatLng(curLatitude, curLongitude);
-            for(int i=dataLongitudeLatitude.indexStasiunAwal;i>dataLongitudeLatitude.indexStasiunAkhir;i--){
+            for(int i=dataLongitudeLatitude.indexStasiunAwal-1;i>dataLongitudeLatitude.indexStasiunAkhir;i--){
 
                 pOptions.add(curPosition);
                 curIdx --;

@@ -21,20 +21,23 @@
 
     <TextView
         android:id="@+id/start_stasiun"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/nama_kereta"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="57dp"
-        android:textSize="@dimen/ukuran_tulisan_notif"
-        android:text="@string/stasiun_asal" />
+        android:layout_marginTop="142dp"
+        android:text="@string/stasiun_asal"
+        android:textSize="@dimen/ukuran_tulisan_notif" />
 
     <TextView
         android:id="@+id/end_stasiun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/spinner_start_stasiun"
+        android:layout_marginTop="233dp"
         android:text="@string/stasiun_tujuan"
         android:textSize="@dimen/ukuran_tulisan_notif" />
 
@@ -44,17 +47,18 @@
         android:id="@+id/spinner_start_stasiun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/start_stasiun" />
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="186dp"
+        android:layout_toEndOf="@+id/nama_kereta" />
 
 
     <Spinner
         android:id="@+id/spinner_end_stasiun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/end_stasiun"
-        android:layout_marginTop="37dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/spinner_start_stasiun"
+        android:layout_marginBottom="257dp" />
 
     <Button
         android:id="@+id/btnOpenMap"
@@ -67,5 +71,7 @@
         android:background="@drawable/rounded_button"
         android:onClick="openMap"
         android:text="Go " />
+
+    <!--asdadasd-->
 
 </RelativeLayout>
