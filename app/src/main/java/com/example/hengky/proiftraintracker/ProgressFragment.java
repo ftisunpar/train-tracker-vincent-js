@@ -66,7 +66,9 @@ public class ProgressFragment extends Fragment implements LocationListener {
         this.idxAkhir = dataStasiun.indexStasiunAkhir;
 
         this.nextIdx = (idxAwal < idxAkhir)? (idxAwal + 1) : (idxAwal-1);
-
+        Log.d("index awal", String.valueOf(idxAwal));
+        Log.d("index sekarang", String.valueOf(nextIdx));
+        Log.d("index akhir", String.valueOf(idxAkhir));
         stasiunSelanjutnya = dataStasiun.listStasiun.get(nextIdx);;
         stasiunAkhir = dataStasiun.stasiunAkhir;
 
@@ -89,9 +91,15 @@ public class ProgressFragment extends Fragment implements LocationListener {
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
         this.onLocationChanged(null);
+        if(idxAwal < idxAkhir ){
+            lat1 = dataStasiun.latitude.get(nextIdx-1);
+            lng1 = dataStasiun.longitude.get(nextIdx-1);
+        }
+        else{
+            lat1 = dataStasiun.latitude.get(nextIdx+1);
+            lng1 = dataStasiun.longitude.get(nextIdx+1);
+        }
 
-        lat1 = dataStasiun.latitude.get(nextIdx-1);
-        lng1 = dataStasiun.longitude.get(nextIdx-1);
 //        String lokasi1=dataStasiun.listStasiun.get(nextIdx);
 //        Log.d("test lokasi 1", lokasi1+ ": "+ String.valueOf(lat1)+" , "+String.valueOf(lng1));
 
