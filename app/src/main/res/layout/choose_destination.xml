@@ -18,6 +18,7 @@
         android:paddingBottom="5dp"
         android:paddingRight="50dp"
         android:paddingLeft="50dp"
+        android:textAlignment="center"
         android:text="Argo Wilis"
         android:background="@drawable/backgroundjudul"
         android:textColor="@color/black"
