@@ -182,7 +182,7 @@ public class ProgressFragment extends Fragment implements LocationListener {
 
             //untuk memberi notifikasi saat sudah dekat stasiun
 
-            if(calculateDistance(lat2,lng2 , curLatitude, curLongitude) < 0.1) { // if distance < 0.1 miles we take locations as equal
+            if(calculateDistance(lat2,lng2 , curLatitude, curLongitude) <= 1*1.61) { // if distance < 0.1 miles we take locations as equal
                 setNotifSaatDekatStasiun(dataStasiun.listStasiun.get(nextIdx));
                 if(nextIdx<dataStasiun.indexStasiunAkhir){
                     nextIdx++;
