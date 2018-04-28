@@ -43,6 +43,9 @@ public class ProgressFragment extends Fragment implements LocationListener {
     double curLatitude, curLongitude; //lokasi dimana user berada
     double lat1, lat2, latLast ;
     double lng1, lng2, lngLast;
+
+
+
     TextView finalEstimation;
     TextView nextEstimation;
 
@@ -192,18 +195,28 @@ public class ProgressFragment extends Fragment implements LocationListener {
 
             if(calculateDistance(lat2,lng2 , curLatitude, curLongitude) <= 1*1.61) { // if distance < 0.1 miles we take locations as equal
                 setNotifSaatDekatStasiun(dataStasiun.listStasiun.get(nextIdx));
-                if(nextIdx<dataStasiun.indexStasiunAkhir){
-                    nextIdx++;
+                if(nextIdx<=dataStasiun.indexStasiunAkhir){
                     if(nextIdx == dataStasiun.indexStasiunAkhir){
-                        Intent intent = new Intent(getActivity(), FinishActivity.class);
-                        startActivity(intent);
+                        if(calculateDistance(lat2,lng2, curLatitude, curLongitude) == calculateDistance(latLast,lngLast, curLatitude, curLongitude)){
+                            Intent intent = new Intent(getActivity(), FinishActivity.class);
+                            startActivity(intent);
+                        }
+
                     }
+                    else{
+                        nextIdx++;
+                    }
+
                 }
                 else if(nextIdx>dataStasiun.indexStasiunAkhir){
-                    nextIdx--;
                     if(nextIdx == dataStasiun.indexStasiunAkhir){
-                        Intent intent = new Intent(getActivity(), FinishActivity.class);
-                        startActivity(intent);
+                        if(calculateDistance(lat2,lng2, curLatitude, curLongitude) == calculateDistance(latLast,lngLast, curLatitude, curLongitude)){
+                            Intent intent = new Intent(getActivity(), FinishActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                    else{
+                        nextIdx--;
                     }
                 }
             }
