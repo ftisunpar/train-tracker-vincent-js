@@ -101,7 +101,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
 
         final Spinner spinner1 = this.findViewById(R.id.spinner_start_stasiun);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, getListStasiunArr());
+                R.layout.spinner_style, getListStasiunArr());
         spinner1.setAdapter(adapter);
 
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -117,7 +117,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
 
         final Spinner spinner2 =this.findViewById(R.id.spinner_end_stasiun);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, getListStasiunArr());
+                R.layout.spinner_style, getListStasiunArr());
         spinner2.setAdapter(adapter2);
 
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

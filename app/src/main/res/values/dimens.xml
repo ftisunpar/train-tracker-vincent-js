@@ -8,7 +8,7 @@
     <dimen name="margin_top_sign_up">130dp</dimen>
 
     <dimen name="ukuran_judul_notif">30sp</dimen>
-    <dimen name="ukuran_tulisan_notif">25sp</dimen>
+    <dimen name="ukuran_tulisan_notif">30sp</dimen>
     <dimen name="margin_notif">30dp</dimen>
 
     <dimen name="margin_top_notif_text">10dp</dimen>

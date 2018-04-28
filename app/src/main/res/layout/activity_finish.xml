@@ -19,7 +19,8 @@
         android:fontFamily="sans-serif"
         android:text="Anda Telah sampai di stasiun Tujuan"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
+        android:background="@drawable/backgroundjudul"
         android:textSize="@dimen/ukuran_judul_notif"
 
         />
