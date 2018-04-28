@@ -9,76 +9,93 @@
 
 
     <TextView
-        android:id="@+id/argo_wilis"
+        android:id="@+id/nama_kereta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="58dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="50dp"
+        android:paddingLeft="50dp"
+        android:textAlignment="center"
         android:text="Argo Wilis"
+        android:background="@drawable/backgroundjudul"
         android:textColor="@color/black"
-        android:textSize="@dimen/ukuran_judul_notif"/>
-
+        android:textSize="30sp"/>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="30dp"
+    android:layout_marginLeft="30dp"
+    android:layout_marginTop="50dp"
+    android:paddingBottom="30dp"
+    android:layout_below="@id/nama_kereta"
+    android:background="@drawable/backgroundjudul"
+    >
     <TextView
-        android:id="@+id/start_wilis"
+        android:id="@+id/start_stasiun"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/argo_wilis"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="57dp"
-        android:textSize="@dimen/ukuran_tulisan_notif"
-        android:text="@string/stasiun_asal" />
+        android:layout_marginTop="40dp"
+        android:text="@string/stasiun_asal"
+        android:textSize="@dimen/ukuran_tulisan_notif" />
 
     <TextView
-        android:id="@+id/end_wilis"
+        android:id="@+id/end_stasiun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/spinner_start_wilis"
+        android:layout_marginTop="140dp"
         android:text="@string/stasiun_tujuan"
         android:textSize="@dimen/ukuran_tulisan_notif" />
 
 
     <Spinner
 
-        android:id="@+id/spinner_start_wilis"
-
-        android:layout_width="wrap_content"
+        android:id="@+id/spinner_start_stasiun"
+        android:layout_width="match_parent"
+        android:layout_marginRight="120dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/start_wilis"
-        android:layout_marginTop="@dimen/margin_antar_element"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:spinnerMode="dropdown"
+        android:layout_marginTop="97dp"
+        android:background="@drawable/backgroundborder"
+        />
+
 
     <Spinner
-        android:id="@+id/spinner_end_wilis"
+        android:id="@+id/spinner_end_stasiun"
         android:layout_width="match_parent"
+        android:layout_marginRight="120dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/end_wilis"
-        android:layout_marginTop="@dimen/margin_antar_element"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:id="@+id/btn_go"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/margin_antar_element"
-        android:text="@string/GO"
-        style="@style/ButtonStyle"
-        android:background="@drawable/rounded_button"
-        android:layout_below="@id/spinner_end_wilis"
-        android:onClick="moveToTripPage"/>
+        android:layout_marginTop="200dp"
+        android:background="@drawable/backgroundborder"/>
+
+</RelativeLayout>
 
     <Button
         android:id="@+id/btnOpenMap"
         style="@style/ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_button"
-        android:layout_below="@id/btn_go"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/jarak_antar_button"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/rounded_button"
         android:onClick="openMap"
-        android:text="@string/openMap" />
+        android:text="Go " />
+
+    <!--asdadasd-->
 
 </RelativeLayout>
