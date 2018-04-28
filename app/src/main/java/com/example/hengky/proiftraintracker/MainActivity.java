@@ -25,14 +25,14 @@ import ir.mirrajabi.searchdialog.core.Searchable;
  * Created by Lenovo Iyoss on 10/02/2018.
  */
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     public String selectedTrain;
     ArrayList<String> namaKereta = new ArrayList<String>();
     SplashScreenActivity splashScreenAct;
     private static ArrayList<String>listStasiun=new ArrayList<>();
     DatabaseReference rootRef;
-    Button buttonNext;
+    Button buttonNext,buttonSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,34 +41,11 @@ public class MainActivity extends AppCompatActivity  {
         namaKereta = splashScreenAct.getKereta();
         setContentView(R.layout.main_page);
 
-        findViewById(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new SimpleSearchDialogCompat(MainActivity.this, "Search...", "Pilih Kereta",
-                        null, getData(), new SearchResultListener<Searchable>() {
-                    @Override
-                    public void onSelected(BaseSearchDialogCompat baseSearchDialogCompat, Searchable searchable, int i) {
-                        selectedTrain = searchable.getTitle();
-                        initializeFirebaseListStasiun();
-                        Toast.makeText(MainActivity.this, selectedTrain, Toast.LENGTH_LONG).show();
-                        baseSearchDialogCompat.dismiss();
-                    }
+        buttonNext = findViewById(R.id.btn_next);
+        buttonSearch = findViewById(R.id.btn_search);
+        buttonSearch.setOnClickListener(this);
+        buttonNext.setOnClickListener(this);
 
-                }).show();
-            }
-        });
-
-        findViewById(R.id.btn_next).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(selectedTrain==null){
-                    Toast.makeText(MainActivity.this, "Silahkan pilih kereta terlebih dahulu", Toast.LENGTH_LONG).show();
-                }
-                else{
-                    moveToAnotherActivity(selectedTrain);
-                }
-            }
-        });
     }
 
     private ArrayList<SearchModel> getData(){
@@ -116,4 +93,28 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
+    @Override
+    public void onClick(View view) {
+        if (view == buttonSearch){
+            new SimpleSearchDialogCompat(MainActivity.this, "Search...", "Pilih Kereta",
+                    null, getData(), new SearchResultListener<Searchable>() {
+                @Override
+                public void onSelected(BaseSearchDialogCompat baseSearchDialogCompat, Searchable searchable, int i) {
+                    selectedTrain = searchable.getTitle();
+                    initializeFirebaseListStasiun();
+                    Toast.makeText(MainActivity.this, selectedTrain, Toast.LENGTH_LONG).show();
+                    baseSearchDialogCompat.dismiss();
+                }
+
+            }).show();
+        }
+        else if(view == buttonNext){
+            if(selectedTrain==null){
+                Toast.makeText(MainActivity.this, "Silahkan pilih kereta terlebih dahulu", Toast.LENGTH_LONG).show();
+            }
+            else{
+                moveToAnotherActivity(selectedTrain);
+            }
+        }
+    }
 }
