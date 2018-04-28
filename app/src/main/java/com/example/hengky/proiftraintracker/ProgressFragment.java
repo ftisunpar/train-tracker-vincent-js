@@ -1,12 +1,19 @@
 package com.example.hengky.proiftraintracker;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -15,7 +22,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
+import static android.content.Context.NOTIFICATION_SERVICE;
+import static android.content.Context.VIBRATOR_SERVICE;
 
 
 public class ProgressFragment extends Fragment implements LocationListener {
@@ -26,15 +34,20 @@ public class ProgressFragment extends Fragment implements LocationListener {
     ChooseDestination dataStasiun;
     String stasiunSelanjutnya;
     String stasiunAkhir;
-    ChooseDestination dataLongitudeLatitude;
-    int idxAwal = dataLongitudeLatitude.indexStasiunAwal;
-    int idxAkhir = dataLongitudeLatitude.indexStasiunAkhir;
+    //ChooseDestination dataLongitudeLatitude;
+    int idxAwal = dataStasiun.indexStasiunAwal;
+    int idxAkhir = dataStasiun.indexStasiunAkhir;
     int currIdx;
     double curLatitude, curLongitude; //lokasi dimana user berada
     double lat1, lat2, latLast ;
     double lng1, lng2, lngLast;
     TextView finalEstimation;
     TextView nextEstimation;
+    //----------------------------------uji coba------------------------------
+    String [] lokasiSeluruhnya = new String[]{"Platinum Kost","Hotel Harris Ciumbuleuit", "Pertamina gas station 34-40111", "Yellow Truck"};
+
+    double [] testLatitude = new double []{-6.878156, -6.880751, -6.887657 };
+    double [] testLongitude = new double []{107.606692, 107.604180, 107.602003};
 
     public ProgressFragment() {
         // Required empty public constructor
@@ -51,16 +64,12 @@ public class ProgressFragment extends Fragment implements LocationListener {
         this.finalEstimation =  view.findViewById(R.id.finalStationEstimation);
         this.nextEstimation = view.findViewById(R.id.nextStationEstimation);
 
-        this.currIdx = (idxAwal > idxAkhir)? (idxAwal -1) : (idxAwal+1);
+        //this.currIdx = (idxAwal > idxAkhir)? (idxAwal -1) : (idxAwal+1);
+        this.currIdx = 1;
+        //dataStasiun = new ChooseDestination();
+        stasiunSelanjutnya = lokasiSeluruhnya[currIdx];
+        stasiunAkhir = lokasiSeluruhnya[lokasiSeluruhnya.length-1];
 
-        dataStasiun = new ChooseDestination();
-        stasiunSelanjutnya = dataLongitudeLatitude.listStasiun.get(currIdx);;
-        stasiunAkhir = dataStasiun.stasiunAkhir;
-        dataLongitudeLatitude = new ChooseDestination();
-//        Log.d("test latitude", String.valueOf(dataLongitudeLatitude.latitude.get(dataLongitudeLatitude.latitude.size()-1)));
-//        Log.d("test longitude", String.valueOf(dataLongitudeLatitude.longitude.get(dataLongitudeLatitude.longitude.size()-1)));
-//        Log.d("test index terpilih", stasiunAwal+"-"+dataStasiun.indexStasiunAwal);
-//        Log.d("test index terpilih(2)", stasiunAkhir+"-"+dataStasiun.indexStasiunAkhir);
         selanjutnya.setText("Stasiun Selanjutnya: "+stasiunSelanjutnya);
         akhir.setText("Stasiun Akhir: "+stasiunAkhir);
         LocationManager locationManager = (LocationManager) this.context.getSystemService(Context.LOCATION_SERVICE);
@@ -79,19 +88,16 @@ public class ProgressFragment extends Fragment implements LocationListener {
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
         this.onLocationChanged(null);
 
-        lat1 = dataLongitudeLatitude.latitude.get(currIdx-1);
-        lng1 = dataLongitudeLatitude.longitude.get(currIdx-1);
-//        String lokasi1=dataLongitudeLatitude.listStasiun.get(currIdx);
-//        Log.d("test lokasi 1", lokasi1+ ": "+ String.valueOf(lat1)+" , "+String.valueOf(lng1));
-
-        lat2 = dataLongitudeLatitude.latitude.get(currIdx);
-        lng2 = dataLongitudeLatitude.longitude.get(currIdx);
-        String lokasi2=dataLongitudeLatitude.listStasiun.get(currIdx);
+        lat1=testLatitude[0];
+        lng1=testLongitude[0];
+        lat2 = testLatitude[currIdx];
+        lng2 = testLongitude[currIdx];
+        String lokasi2=lokasiSeluruhnya[currIdx];
         Log.d("test lokasi selanjutnya", lokasi2+ ": "+ String.valueOf(lat2)+" , "+String.valueOf(lng2));
 
-        latLast = dataLongitudeLatitude.latitude.get(dataLongitudeLatitude.indexStasiunAkhir);
-        lngLast = dataLongitudeLatitude.longitude.get(dataLongitudeLatitude.indexStasiunAkhir);
-        String lokasi3=dataLongitudeLatitude.listStasiun.get(dataLongitudeLatitude.indexStasiunAkhir);
+        latLast = testLatitude[testLatitude.length-1];
+        lngLast = testLongitude[testLongitude.length-1];
+        String lokasi3=lokasiSeluruhnya[testLongitude.length-1];
         Log.d("test lokasi akhir", lokasi3+ ": "+ String.valueOf(latLast)+" , "+String.valueOf(lngLast));
 
         double totalDisRes = this.calculateDistance(lat1, lng1 , latLast,lngLast );
@@ -141,14 +147,14 @@ public class ProgressFragment extends Fragment implements LocationListener {
             curLatitude = location.getLatitude();
             curLongitude = location.getLongitude();
 
-            lat2 = dataLongitudeLatitude.latitude.get(currIdx);
-            lng2 = dataLongitudeLatitude.longitude.get(currIdx);
-            String lokasi2=dataLongitudeLatitude.listStasiun.get(currIdx);
+            lat2 = testLatitude[currIdx];
+            lng2 = testLongitude[currIdx];
+            String lokasi2=lokasiSeluruhnya[currIdx];
             Log.d("test lokasi selanjutnya", lokasi2+ ": "+ String.valueOf(lat2)+" , "+String.valueOf(lng2));
 
-            latLast = dataLongitudeLatitude.latitude.get(dataLongitudeLatitude.indexStasiunAkhir);
-            lngLast = dataLongitudeLatitude.longitude.get(dataLongitudeLatitude.indexStasiunAkhir);
-            String lokasi3=dataLongitudeLatitude.listStasiun.get(dataLongitudeLatitude.indexStasiunAkhir);
+            latLast = testLatitude[testLatitude.length-1];
+            lngLast = testLongitude[testLongitude.length-1];
+            String lokasi3=lokasiSeluruhnya[testLongitude.length-1];
             Log.d("test lokasi akhir", lokasi3+ ": "+ String.valueOf(latLast)+" , "+String.valueOf(lngLast));
 
             double totalDisRes = this.calculateDistance(curLatitude, curLongitude , latLast,lngLast );
@@ -170,11 +176,11 @@ public class ProgressFragment extends Fragment implements LocationListener {
             //untuk memberi notifikasi saat sudah dekat stasiun
 
             if(calculateDistance(lat2,lng2 , curLatitude, curLongitude) < 0.1) { // if distance < 0.1 miles we take locations as equal
-                setNotifSaatDekatStasiun(dataStasiun.listStasiun.get(currIdx));
-                if(currIdx<dataLongitudeLatitude.indexStasiunAkhir){
+                setNotifSaatDekatStasiun(lokasiSeluruhnya[currIdx]);
+                if(currIdx<2){
                     currIdx++;
                 }
-                else if(currIdx>dataLongitudeLatitude.indexStasiunAkhir){
+                else if(currIdx>dataStasiun.indexStasiunAkhir){
                     currIdx--;
                 }
             }
@@ -220,7 +226,25 @@ public class ProgressFragment extends Fragment implements LocationListener {
 
 
     public void setNotifSaatDekatStasiun(String stasiun){
-
+        Intent intent =new Intent();
+        PendingIntent pIntent = PendingIntent.getActivity(this.getContext(), 0, intent, 0);
+        Notification noti = new Notification.Builder(this.getContext())
+                .setTicker("Train Tracker")
+                .setContentTitle("Train Tracker")
+                .setContentText("Sebentar lagi anda akan tiba di :" + stasiun)
+                .setSmallIcon(R.drawable.train_icon)
+                .setContentIntent(pIntent).getNotification();
+        noti.flags = Notification.FLAG_AUTO_CANCEL;
+        NotificationManager nm = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+        nm.notify(0, noti);
+        Vibrator v = (Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(500,VibrationEffect.DEFAULT_AMPLITUDE));
+        }else{
+            //deprecated in API 26
+            v.vibrate(500);
+        }
     }
 
 }

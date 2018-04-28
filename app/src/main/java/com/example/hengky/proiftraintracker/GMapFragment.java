@@ -151,35 +151,39 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
 
 
 
-        if(dataLongitudeLatitude.indexStasiunAwal < dataLongitudeLatitude.indexStasiunAkhir){
-            int curIdx = dataLongitudeLatitude.indexStasiunAwal;
-            double curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
-            double curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
-            LatLng curPosition= new LatLng(curLatitude, curLongitude);
-            for(int i=dataLongitudeLatitude.indexStasiunAwal;i<dataLongitudeLatitude.indexStasiunAkhir;i++){
-                pOptions.add(curPosition);
-                curIdx ++;
-                curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
-                curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
-                curPosition= new LatLng(curLatitude, curLongitude);
-            }
-        }
-        else{
-            int curIdx = dataLongitudeLatitude.indexStasiunAwal;
-            double curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
-            double curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
-            LatLng curPosition= new LatLng(curLatitude, curLongitude);
-            for(int i=dataLongitudeLatitude.indexStasiunAwal;i>dataLongitudeLatitude.indexStasiunAkhir;i--){
+//        if(dataLongitudeLatitude.indexStasiunAwal < dataLongitudeLatitude.indexStasiunAkhir){
+//            int curIdx = dataLongitudeLatitude.indexStasiunAwal;
+//            double curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
+//            double curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
+//            LatLng curPosition= new LatLng(curLatitude, curLongitude);
+//            for(int i=dataLongitudeLatitude.indexStasiunAwal;i<dataLongitudeLatitude.indexStasiunAkhir;i++){
+//                pOptions.add(curPosition);
+//                curIdx ++;
+//                curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
+//                curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
+//                curPosition= new LatLng(curLatitude, curLongitude);
+//            }
+//        }
+//        else{
+//            int curIdx = dataLongitudeLatitude.indexStasiunAwal;
+//            double curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
+//            double curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
+//            LatLng curPosition= new LatLng(curLatitude, curLongitude);
+//            for(int i=dataLongitudeLatitude.indexStasiunAwal;i>dataLongitudeLatitude.indexStasiunAkhir;i--){
+//
+//                pOptions.add(curPosition);
+//                curIdx --;
+//                curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
+//                curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
+//                curPosition= new LatLng(curLatitude, curLongitude);
+//            }
+//        }
+        ProgressFragment test = new ProgressFragment();
 
-                pOptions.add(curPosition);
-                curIdx --;
-                curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
-                curLatitude = dataLongitudeLatitude.latitude.get(curIdx);
-                curPosition= new LatLng(curLatitude, curLongitude);
-            }
-        }
-
-        pOptions.add(koordinatAkhir);
+        LatLng lokasi1 = new LatLng(test.testLatitude[0], test.testLongitude[0]);
+        LatLng lokasi2 = new LatLng(test.testLatitude[1], test.testLongitude[1]);
+        LatLng lokasi3 = new LatLng(test.testLatitude[2], test.testLongitude[2]);
+        pOptions.add(lokasi1).add(lokasi2).add(lokasi3);
         pOptions.width(5).color(Color.RED).geodesic(true);
         MarkerOptions mOptionAWal = new MarkerOptions().position(koordinatAwal);
         MarkerOptions mOptionAkhir = new MarkerOptions().position(koordinatAkhir);
