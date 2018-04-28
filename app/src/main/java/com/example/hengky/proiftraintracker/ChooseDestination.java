@@ -189,8 +189,14 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
     }
 
     public void openMap(View view){
-        Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
+        if(indexStasiunAwal == indexStasiunAkhir){
+            Toast.makeText(ChooseDestination.this, ("Stasiun akhir dan stasiun awal tidak boleh sama"), Toast.LENGTH_LONG).show();
+        }
+        else{
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
+        }
+
     }
 
     private String[] getListStasiunArr(){

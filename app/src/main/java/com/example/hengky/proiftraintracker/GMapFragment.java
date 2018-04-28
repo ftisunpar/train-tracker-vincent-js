@@ -148,7 +148,7 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
         mMap.setMyLocationEnabled(true);
 
         PolylineOptions pOptions = new PolylineOptions();
-
+        pOptions.add(koordinatAwal);
         if(dataLongitudeLatitude.indexStasiunAwal < dataLongitudeLatitude.indexStasiunAkhir){
             int curIdx = dataLongitudeLatitude.indexStasiunAwal;
             double curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
