@@ -1,12 +1,19 @@
 package com.example.hengky.proiftraintracker;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -15,13 +22,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
+import static android.content.Context.NOTIFICATION_SERVICE;
+import static android.content.Context.VIBRATOR_SERVICE;
 
 
 public class ProgressFragment extends Fragment implements LocationListener {
 
     private FragmentListener listener;
-    MapsActivity context;
+    MapsActivity mapsActivity;
     TextView txt, selanjutnya, akhir;
     ChooseDestination dataStasiun;
     String stasiunSelanjutnya;
@@ -63,10 +71,10 @@ public class ProgressFragment extends Fragment implements LocationListener {
 //        Log.d("test index terpilih(2)", stasiunAkhir+"-"+dataStasiun.indexStasiunAkhir);
         selanjutnya.setText("Stasiun Selanjutnya: "+stasiunSelanjutnya);
         akhir.setText("Stasiun Akhir: "+stasiunAkhir);
-        LocationManager locationManager = (LocationManager) this.context.getSystemService(Context.LOCATION_SERVICE);
-        this.context.setNotification();
-        if (ActivityCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        LocationManager locationManager = (LocationManager) this.mapsActivity.getSystemService(Context.LOCATION_SERVICE);
+        this.mapsActivity.setNotification();
+        if (ActivityCompat.checkSelfPermission(this.mapsActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this.mapsActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -118,7 +126,7 @@ public class ProgressFragment extends Fragment implements LocationListener {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.context = (MapsActivity) context;
+        this.mapsActivity = (MapsActivity) context;
         if (context instanceof FragmentListener) {
             listener = (FragmentListener) context;
         } else {
@@ -131,9 +139,11 @@ public class ProgressFragment extends Fragment implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         if(location==null){
+            setNotifSaatDekatStasiun(dataStasiun.listStasiun.get(currIdx-1));
             txt.setText("0.0 km/h");
         }
         else{
+            setNotifSaatDekatStasiun(dataStasiun.listStasiun.get(currIdx-1));
             float nCurrentSpeed = (float) (location.getSpeed() * 3.6);
 
             txt.setText(String.format("%.0f km/h", nCurrentSpeed));
@@ -220,7 +230,25 @@ public class ProgressFragment extends Fragment implements LocationListener {
 
 
     public void setNotifSaatDekatStasiun(String stasiun){
-
+        Intent intent =new Intent();
+        PendingIntent pIntent = PendingIntent.getActivity(this.mapsActivity, 0, intent, 0);
+        Notification noti = new Notification.Builder(this.mapsActivity)
+                .setTicker("Train Tracker")
+                .setContentTitle("Train Tracker")
+                .setContentText("Sebentar lagi anda akan tiba di :" + stasiun)
+                .setSmallIcon(R.drawable.train_icon)
+                .setContentIntent(pIntent).getNotification();
+        noti.flags = Notification.FLAG_AUTO_CANCEL;
+        NotificationManager nm = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+        nm.notify(0, noti);
+        Vibrator v = (Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(500,VibrationEffect.DEFAULT_AMPLITUDE));
+        }else{
+            //deprecated in API 26
+            v.vibrate(500);
+        }
     }
 
 }
