@@ -44,7 +44,7 @@ public class ProgressFragment extends Fragment implements LocationListener {
     double lat1, lat2, latLast ;
     double lng1, lng2, lngLast;
 
-
+    boolean isArrived;
 
     TextView finalEstimation;
     TextView nextEstimation;
@@ -64,7 +64,7 @@ public class ProgressFragment extends Fragment implements LocationListener {
         this.finalEstimation =  view.findViewById(R.id.finalStationEstimation);
         this.nextEstimation = view.findViewById(R.id.nextStationEstimation);
         dataStasiun = new ChooseDestination();
-
+        this.isArrived = false;
         this.idxAwal = dataStasiun.indexStasiunAwal;
         this.idxAkhir = dataStasiun.indexStasiunAkhir;
 
@@ -196,12 +196,10 @@ public class ProgressFragment extends Fragment implements LocationListener {
             if(calculateDistance(lat2,lng2 , curLatitude, curLongitude) <= 1*1.61) { // if distance < 0.1 miles we take locations as equal
                 setNotifSaatDekatStasiun(dataStasiun.listStasiun.get(nextIdx));
                 if(nextIdx<=dataStasiun.indexStasiunAkhir){
-                    if(nextIdx == dataStasiun.indexStasiunAkhir){
-                        if(calculateDistance(lat2,lng2, curLatitude, curLongitude) == calculateDistance(latLast,lngLast, curLatitude, curLongitude)){
-                            Intent intent = new Intent(getActivity(), FinishActivity.class);
-                            startActivity(intent);
-                        }
-
+                    if(nextIdx == dataStasiun.indexStasiunAkhir && isArrived == false){
+                        this.isArrived = true;
+                        Intent intent = new Intent(getActivity(), FinishActivity.class);
+                        startActivity(intent);
                     }
                     else{
                         nextIdx++;
@@ -209,11 +207,10 @@ public class ProgressFragment extends Fragment implements LocationListener {
 
                 }
                 else if(nextIdx>dataStasiun.indexStasiunAkhir){
-                    if(nextIdx == dataStasiun.indexStasiunAkhir){
-                        if(calculateDistance(lat2,lng2, curLatitude, curLongitude) == calculateDistance(latLast,lngLast, curLatitude, curLongitude)){
-                            Intent intent = new Intent(getActivity(), FinishActivity.class);
-                            startActivity(intent);
-                        }
+                    if(nextIdx == dataStasiun.indexStasiunAkhir && isArrived == false){
+                        this.isArrived = true;
+                        Intent intent = new Intent(getActivity(), FinishActivity.class);
+                        startActivity(intent);
                     }
                     else{
                         nextIdx--;
