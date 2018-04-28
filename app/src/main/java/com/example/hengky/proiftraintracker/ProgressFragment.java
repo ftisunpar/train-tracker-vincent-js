@@ -160,7 +160,7 @@ public class ProgressFragment extends Fragment implements LocationListener {
             }
             else{
                 estimasiStasiunSelanjutnya = nextDisRes / 25;
-                estimasiStasiunAkhir = nextDisRes / 25;
+                estimasiStasiunAkhir = totalDisRes / 25;
             }
 
             nextEstimation.setText(String.format("Stasiun selanjutnya : %.2f", estimasiStasiunSelanjutnya)+" jam");
