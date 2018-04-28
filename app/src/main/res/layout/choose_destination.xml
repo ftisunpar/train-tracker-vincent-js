@@ -48,17 +48,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="186dp"
-        android:layout_toEndOf="@+id/nama_kereta" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="195dp" />
 
 
     <Spinner
         android:id="@+id/spinner_end_stasiun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/spinner_start_stasiun"
-        android:layout_marginBottom="257dp" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp" />
 
     <Button
         android:id="@+id/btnOpenMap"

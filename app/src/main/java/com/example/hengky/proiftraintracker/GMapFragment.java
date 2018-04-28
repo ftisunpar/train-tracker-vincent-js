@@ -149,8 +149,6 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
 
         PolylineOptions pOptions = new PolylineOptions();
 
-
-
         if(dataLongitudeLatitude.indexStasiunAwal < dataLongitudeLatitude.indexStasiunAkhir){
             int curIdx = dataLongitudeLatitude.indexStasiunAwal;
             double curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
