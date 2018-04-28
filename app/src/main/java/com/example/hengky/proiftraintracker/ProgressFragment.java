@@ -1,21 +1,32 @@
 package com.example.hengky.proiftraintracker;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
+import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 
 
 public class ProgressFragment extends Fragment implements LocationListener {
@@ -173,9 +184,17 @@ public class ProgressFragment extends Fragment implements LocationListener {
                 setNotifSaatDekatStasiun(dataStasiun.listStasiun.get(currIdx));
                 if(currIdx<dataLongitudeLatitude.indexStasiunAkhir){
                     currIdx++;
+                    if(currIdx == dataLongitudeLatitude.indexStasiunAkhir){
+                        Intent intent = new Intent(getActivity(), FinishActivity.class);
+                        startActivity(intent);
+                    }
                 }
                 else if(currIdx>dataLongitudeLatitude.indexStasiunAkhir){
                     currIdx--;
+                    if(currIdx == dataLongitudeLatitude.indexStasiunAkhir){
+                        Intent intent = new Intent(getActivity(), FinishActivity.class);
+                        startActivity(intent);
+                    }
                 }
             }
         }

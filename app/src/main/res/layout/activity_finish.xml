@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundimage"
+    tools:context=".FinishActivity"
+    >
+
+    <TextView
+        android:id="@+id/txt_choose_train"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="106dp"
+        android:fontFamily="sans-serif"
+        android:text="Anda Telah sampai di stasiun Tujuan"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/ukuran_judul_notif"
+
+        />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ukuran_logo"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:src="@drawable/train_logo" />
+
+    <Button
+        android:id="@+id/btn_homepage"
+        style="@style/ButtonStyle"
+        android:onClick="finishClicked"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView2"
+        android:layout_marginStart="11dp"
+        android:background="@drawable/rounded_button"
+        android:text="Go To Homepage" />
+
+
+
+    <!--<Button-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="TES"-->
+    <!--android:id="@+id/tes"/>-->
+
+
+</RelativeLayout>
