@@ -17,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="136dp"
         android:fontFamily="sans-serif"
-        android:text="Anda Telah sampai di stasiun Tujuan"
+        android:text="Anda Telah Sampai Di Stasiun Tujuan"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:background="@drawable/backgroundjudul"

@@ -1,11 +1,13 @@
 package com.example.hengky.proiftraintracker;
 
 
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 
@@ -20,6 +22,7 @@ import android.support.v4.app.FragmentTransaction;
 
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.view.KeyEvent;
 
 
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
@@ -44,6 +47,42 @@ public class MapsActivity extends FragmentActivity implements FragmentListener {
         ft.add(R.id.frame_container,progressFragment);
         ft.add(R.id.frame_container,gMapFragment);
         ft.commit();
+
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exitByBackKey();
+
+            //moveTaskToBack(false);
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    protected void exitByBackKey() {
+
+        AlertDialog alertbox = new AlertDialog.Builder(this)
+                .setMessage("Apakah anda yakin ingin keluar?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                    // do something when the button is clicked
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                        finish();
+                        //close();
+
+
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                    // do something when the button is clicked
+                    public void onClick(DialogInterface arg0, int arg1) {
+                    }
+                })
+                .show();
 
     }
 
