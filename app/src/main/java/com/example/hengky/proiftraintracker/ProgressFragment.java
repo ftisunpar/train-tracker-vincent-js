@@ -38,8 +38,8 @@ public class ProgressFragment extends Fragment implements LocationListener {
     ChooseDestination dataStasiun;
     String stasiunSelanjutnya;
     String stasiunAkhir;
-    int idxAwal, idxAkhir;
-    int nextIdx;
+    int idxSekarang,idxSelanjutnya, idxAkhir;
+    
     double curLatitude, curLongitude; //lokasi dimana user berada
     double lat1, lat2, latLast ;
     double lng1, lng2, lngLast;
@@ -65,14 +65,14 @@ public class ProgressFragment extends Fragment implements LocationListener {
         this.nextEstimation = view.findViewById(R.id.nextStationEstimation);
         dataStasiun = new ChooseDestination();
         this.isArrived = false;
-        this.idxAwal = dataStasiun.indexStasiunAwal;
+        this.idxSekarang = dataStasiun.indexStasiunAwal;
         this.idxAkhir = dataStasiun.indexStasiunAkhir;
 
-        this.nextIdx = (idxAwal < idxAkhir)? (idxAwal + 1) : (idxAwal-1);
-        Log.d("index awal", String.valueOf(idxAwal));
-        Log.d("index sekarang", String.valueOf(nextIdx));
+        this.idxSelanjutnya = (idxSekarang < idxAkhir)? (idxSekarang + 1) : (idxSekarang-1);
+        Log.d("index awal", String.valueOf(idxSekarang));
+        Log.d("index selanjutnya", String.valueOf(idxSelanjutnya));
         Log.d("index akhir", String.valueOf(idxAkhir));
-        stasiunSelanjutnya = dataStasiun.listStasiun.get(nextIdx);;
+        stasiunSelanjutnya = dataStasiun.listStasiun.get(idxSelanjutnya);
         stasiunAkhir = dataStasiun.stasiunAkhir;
 
         selanjutnya.setText("Stasiun Selanjutnya: "+stasiunSelanjutnya);
@@ -94,21 +94,23 @@ public class ProgressFragment extends Fragment implements LocationListener {
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
         this.onLocationChanged(null);
-        if(idxAwal < idxAkhir ){
-            lat1 = dataStasiun.latitude.get(nextIdx-1);
-            lng1 = dataStasiun.longitude.get(nextIdx-1);
-        }
-        else{
-            lat1 = dataStasiun.latitude.get(nextIdx+1);
-            lng1 = dataStasiun.longitude.get(nextIdx+1);
-        }
+//        if(idxSekarang < idxAkhir ){
+//            lat1 = dataStasiun.latitude.get(nextIdx-1);
+//            lng1 = dataStasiun.longitude.get(nextIdx-1);
+//        }
+//        else{
+//            lat1 = dataStasiun.latitude.get(nextIdx+1);
+//            lng1 = dataStasiun.longitude.get(nextIdx+1);
+//        }
+        lat1= dataStasiun.latitude.get(idxSekarang);
+        lng1 = dataStasiun.longitude.get(idxSekarang);
 
 //        String lokasi1=dataStasiun.listStasiun.get(nextIdx);
 //        Log.d("test lokasi 1", lokasi1+ ": "+ String.valueOf(lat1)+" , "+String.valueOf(lng1));
 
-        lat2 = dataStasiun.latitude.get(nextIdx);
-        lng2 = dataStasiun.longitude.get(nextIdx);
-        String lokasi2=dataStasiun.listStasiun.get(nextIdx);
+        lat2 = dataStasiun.latitude.get(idxSelanjutnya);
+        lng2 = dataStasiun.longitude.get(idxSelanjutnya);
+        String lokasi2=dataStasiun.listStasiun.get(idxSelanjutnya);
         Log.d("test lokasi selanjutnya", lokasi2+ ": "+ String.valueOf(lat2)+" , "+String.valueOf(lng2));
 
         latLast = dataStasiun.latitude.get(dataStasiun.indexStasiunAkhir);
@@ -165,9 +167,9 @@ public class ProgressFragment extends Fragment implements LocationListener {
             curLatitude = location.getLatitude();
             curLongitude = location.getLongitude();
 
-            lat2 = dataStasiun.latitude.get(nextIdx);
-            lng2 = dataStasiun.longitude.get(nextIdx);
-            String lokasi2=dataStasiun.listStasiun.get(nextIdx);
+            lat2 = dataStasiun.latitude.get(idxSelanjutnya);
+            lng2 = dataStasiun.longitude.get(idxSelanjutnya);
+            String lokasi2=dataStasiun.listStasiun.get(idxSelanjutnya);
             Log.d("test lokasi selanjutnya", lokasi2+ ": "+ String.valueOf(lat2)+" , "+String.valueOf(lng2));
 
             latLast = dataStasiun.latitude.get(dataStasiun.indexStasiunAkhir);
@@ -194,28 +196,23 @@ public class ProgressFragment extends Fragment implements LocationListener {
             //untuk memberi notifikasi saat sudah dekat stasiun
 
             if(calculateDistance(lat2,lng2 , curLatitude, curLongitude) <= 1*1.61) { // if distance < 0.1 miles we take locations as equal
-                setNotifSaatDekatStasiun(dataStasiun.listStasiun.get(nextIdx));
-                if(nextIdx<=dataStasiun.indexStasiunAkhir){
-                    if(nextIdx == dataStasiun.indexStasiunAkhir && isArrived == false){
-                        this.isArrived = true;
-                        Intent intent = new Intent(getActivity(), FinishActivity.class);
-                        startActivity(intent);
+                setNotifSaatDekatStasiun(dataStasiun.listStasiun.get(idxSelanjutnya));
+                if(idxSelanjutnya == dataStasiun.indexStasiunAkhir && isArrived == false){
+                    this.isArrived = true;
+                    Intent intent = new Intent(getActivity(), FinishActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    if(idxSelanjutnya<dataStasiun.indexStasiunAkhir){
+                        idxSelanjutnya++;
                     }
-                    else{
-                        nextIdx++;
+                    else if(idxSelanjutnya>dataStasiun.indexStasiunAkhir){
+                        idxSelanjutnya--;
                     }
+                    this.stasiunSelanjutnya = dataStasiun.listStasiun.get(idxSelanjutnya);
+                    this.selanjutnya.setText("Stasiun Selanjutnya: "+stasiunSelanjutnya);
+                }
 
-                }
-                else if(nextIdx>dataStasiun.indexStasiunAkhir){
-                    if(nextIdx == dataStasiun.indexStasiunAkhir && isArrived == false){
-                        this.isArrived = true;
-                        Intent intent = new Intent(getActivity(), FinishActivity.class);
-                        startActivity(intent);
-                    }
-                    else{
-                        nextIdx--;
-                    }
-                }
             }
         }
     }
@@ -256,8 +253,6 @@ public class ProgressFragment extends Fragment implements LocationListener {
         return (rad * 180.0 / Math.PI);
     }
 
-
-
     public void setNotifSaatDekatStasiun(String stasiun){
         Intent intent =new Intent();
         PendingIntent pIntent = PendingIntent.getActivity(this.mapsActivity, 0, intent, 0);
@@ -266,6 +261,7 @@ public class ProgressFragment extends Fragment implements LocationListener {
                 .setContentTitle("Train Tracker")
                 .setContentText("Sebentar lagi anda akan tiba di " + stasiun)
                 .setSmallIcon(R.drawable.train_icon)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pIntent).getNotification();
         noti.flags = Notification.FLAG_AUTO_CANCEL;
         NotificationManager nm = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
