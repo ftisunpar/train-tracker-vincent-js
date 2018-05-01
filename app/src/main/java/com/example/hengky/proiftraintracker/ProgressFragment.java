@@ -255,16 +255,30 @@ public class ProgressFragment extends Fragment implements LocationListener {
     public void setNotifSaatDekatStasiun(String stasiun){
         Intent intent =new Intent();
         PendingIntent pIntent = PendingIntent.getActivity(this.mapsActivity, 0, intent, 0);
-        Notification noti = new Notification.Builder(this.mapsActivity)
-                .setTicker("Train Tracker")
-                .setContentTitle("Train Tracker")
-                .setContentText("Sebentar lagi anda akan tiba di " + stasiun)
-                .setSmallIcon(R.drawable.train_icon)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pIntent).getNotification();
-        noti.flags = Notification.FLAG_AUTO_CANCEL;
-        NotificationManager nm = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
-        nm.notify(0, noti);
+//        Notification noti = new Notification.Builder(this.mapsActivity)
+//                .setTicker("Train Tracker")
+//                .setContentTitle("Train Tracker")
+//                .setWhen(System.currentTimeMillis())
+//                .setContentText("Sebentar lagi anda akan tiba di " + stasiun)
+//                .setSmallIcon(R.drawable.train_icon)
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                .setContentIntent(pIntent).getNotification();
+//        noti.flags = Notification.FLAG_AUTO_CANCEL;
+//        NotificationManager nm = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+//        nm.notify(0, noti);
+        NotificationCompat.Builder notific = new NotificationCompat.Builder(this.mapsActivity);
+        notific.setAutoCancel(true);
+        notific.setSmallIcon(R.drawable.train_icon);
+        notific.setTicker("Train Tracker");
+        notific.setWhen(System.currentTimeMillis());
+        notific.setContentTitle("Train Tracker");
+        notific.setContentText("Sebentar lagi anda akan tiba di stasiun "+ stasiun);
+
+        notific.setContentIntent(pIntent);
+        NotificationManager notMan = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+        notMan.notify(123456, notific.build());
+
+
         Vibrator v = (Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE);
         // Vibrate for 500 milliseconds
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
