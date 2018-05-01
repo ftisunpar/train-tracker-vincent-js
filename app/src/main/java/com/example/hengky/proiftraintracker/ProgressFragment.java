@@ -129,8 +129,8 @@ public class ProgressFragment extends Fragment implements LocationListener {
         estimasiStasiunSelanjutnya = calculateTime(nextDisRes*1000, 25/3.6);
         estimasiStasiunAkhir = calculateTime(totalDisRes*1000, 25/3.6);
 
-        nextEstimation.setText("Stasiun selanjutnya = "+ estimasiStasiunSelanjutnya);
-        finalEstimation.setText("Stasiun akhir = " + estimasiStasiunAkhir);
+        nextEstimation.setText("Stasiun selanjutnya : "+ estimasiStasiunSelanjutnya);
+        finalEstimation.setText("Stasiun akhir : " + estimasiStasiunAkhir);
 
         return view;
     }
@@ -174,16 +174,16 @@ public class ProgressFragment extends Fragment implements LocationListener {
             double nextDisRes = this.calculateDistance(curLatitude, curLongitude, lat2, lng2);
             String estimasiStasiunSelanjutnya, estimasiStasiunAkhir;
             if(nCurrentSpeed >= 25){
-                estimasiStasiunSelanjutnya = calculateTime(nextDisRes*1000, nCurrentSpeed/3.6);
-                estimasiStasiunAkhir = calculateTime(totalDisRes*1000, nCurrentSpeed/3.6);
+                estimasiStasiunSelanjutnya = calculateTime(nextDisRes*1000, nCurrentSpeed);
+                estimasiStasiunAkhir = calculateTime(totalDisRes*1000, nCurrentSpeed);
             }
             else{
                 estimasiStasiunSelanjutnya = calculateTime(nextDisRes*1000, 25/3.6);
                 estimasiStasiunAkhir = calculateTime(totalDisRes*1000, 25/3.6);
             }
 
-            nextEstimation.setText("Stasiun selanjutnya = "+ estimasiStasiunSelanjutnya);
-            finalEstimation.setText("Stasiun akhir = " + estimasiStasiunAkhir);
+            nextEstimation.setText("Stasiun selanjutnya : "+ estimasiStasiunSelanjutnya);
+            finalEstimation.setText("Stasiun akhir : " + estimasiStasiunAkhir);
 
             //untuk memberi notifikasi saat sudah dekat stasiun
             if(nextDisRes<0.75) { // jika jarak lebih kecil dari 750 meter, diasumsikan sudah dekat dengan stasiun berikutnya
