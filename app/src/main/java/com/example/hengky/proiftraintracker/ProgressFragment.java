@@ -25,6 +25,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.content.Context.NOTIFICATION_SERVICE;
 import static android.content.Context.VIBRATOR_SERVICE;
@@ -167,15 +169,15 @@ public class ProgressFragment extends Fragment implements LocationListener {
             curLatitude = location.getLatitude();
             curLongitude = location.getLongitude();
 
-            lat2 = dataStasiun.latitude.get(idxSelanjutnya);
-            lng2 = dataStasiun.longitude.get(idxSelanjutnya);
-            String lokasi2=dataStasiun.listStasiun.get(idxSelanjutnya);
-            Log.d("test lokasi selanjutnya", lokasi2+ ": "+ String.valueOf(lat2)+" , "+String.valueOf(lng2));
+//            lat2 = dataStasiun.latitude.get(idxSelanjutnya);
+//            lng2 = dataStasiun.longitude.get(idxSelanjutnya);
+            //String lokasi2=dataStasiun.listStasiun.get(idxSelanjutnya);
+            //Log.d("test lokasi selanjutnya", lokasi2+ ": "+ String.valueOf(lat2)+" , "+String.valueOf(lng2));
 
-            latLast = dataStasiun.latitude.get(dataStasiun.indexStasiunAkhir);
-            lngLast = dataStasiun.longitude.get(dataStasiun.indexStasiunAkhir);
-            String lokasi3=dataStasiun.listStasiun.get(dataStasiun.indexStasiunAkhir);
-            Log.d("test lokasi akhir", lokasi3+ ": "+ String.valueOf(latLast)+" , "+String.valueOf(lngLast));
+//            latLast = dataStasiun.latitude.get(dataStasiun.indexStasiunAkhir);
+//            lngLast = dataStasiun.longitude.get(dataStasiun.indexStasiunAkhir);
+//            String lokasi3=dataStasiun.listStasiun.get(dataStasiun.indexStasiunAkhir);
+//            Log.d("test lokasi akhir", lokasi3+ ": "+ String.valueOf(latLast)+" , "+String.valueOf(lngLast));
 
             double totalDisRes = this.calculateDistance(curLatitude, curLongitude , latLast,lngLast );
             double nextDisRes = this.calculateDistance(curLatitude, curLongitude, lat2, lng2);
@@ -192,27 +194,38 @@ public class ProgressFragment extends Fragment implements LocationListener {
             nextEstimation.setText(String.format("Stasiun selanjutnya : %.2f", estimasiStasiunSelanjutnya)+" jam");
             finalEstimation.setText(String.format("Stasiun akhir : %.2f", estimasiStasiunAkhir)+" jam");
 
-
             //untuk memberi notifikasi saat sudah dekat stasiun
-
-            if(calculateDistance(lat2,lng2 , curLatitude, curLongitude) <= 1*1.61) { // if distance < 0.1 miles we take locations as equal
+            if(nextDisRes<0.5) { // if distance <0.5 km we take locations as equal
                 setNotifSaatDekatStasiun(dataStasiun.listStasiun.get(idxSelanjutnya));
+                if(idxSelanjutnya<dataStasiun.indexStasiunAkhir){
+                    idxSelanjutnya++;
+                }
+                else if(idxSelanjutnya>dataStasiun.indexStasiunAkhir){
+                    idxSelanjutnya--;
+                }
+                lat2 = dataStasiun.latitude.get(idxSelanjutnya);
+                lng2 = dataStasiun.longitude.get(idxSelanjutnya);
+                this.stasiunSelanjutnya = dataStasiun.listStasiun.get(idxSelanjutnya);
+                this.selanjutnya.setText("Stasiun Selanjutnya: "+stasiunSelanjutnya);
+                this.stasiunSelanjutnya = dataStasiun.listStasiun.get(idxSelanjutnya);
+                this.selanjutnya.setText("Stasiun Selanjutnya: "+stasiunSelanjutnya);
+
                 if(idxSelanjutnya == dataStasiun.indexStasiunAkhir && isArrived == false){
                     this.isArrived = true;
                     Intent intent = new Intent(getActivity(), FinishActivity.class);
                     startActivity(intent);
-                }
-                else{
-                    if(idxSelanjutnya<dataStasiun.indexStasiunAkhir){
-                        idxSelanjutnya++;
-                    }
-                    else if(idxSelanjutnya>dataStasiun.indexStasiunAkhir){
-                        idxSelanjutnya--;
-                    }
-                    this.stasiunSelanjutnya = dataStasiun.listStasiun.get(idxSelanjutnya);
-                    this.selanjutnya.setText("Stasiun Selanjutnya: "+stasiunSelanjutnya);
-                }
 
+                }
+//                else{
+//                    if(idxSelanjutnya<dataStasiun.indexStasiunAkhir){
+//                        idxSelanjutnya++;
+//                    }
+//                    else if(idxSelanjutnya>dataStasiun.indexStasiunAkhir){
+//                        idxSelanjutnya--;
+//                    }
+//                    this.stasiunSelanjutnya = dataStasiun.listStasiun.get(idxSelanjutnya);
+//                    this.selanjutnya.setText("Stasiun Selanjutnya: "+stasiunSelanjutnya);
+//                }
             }
         }
     }

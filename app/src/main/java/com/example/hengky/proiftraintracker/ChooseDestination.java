@@ -65,10 +65,10 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         TextView textView = findViewById(R.id.nama_kereta);
         textView.setText(message);
 
-
-
         daftarStasiun = new MainActivity();
         listStasiun = daftarStasiun.getListStasiun();
+        this.latitude.clear();
+        this.longitude.clear();
 
         final String [] listKota = getListStasiunArr();
         for(int i=0;i<listKota.length;i++){
@@ -134,7 +134,6 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         reqPermission();
 
         buttonMap = this.findViewById(R.id.btnOpenMap);
-        //getLangitudeLotitudeKota();
     }
 
     @Override

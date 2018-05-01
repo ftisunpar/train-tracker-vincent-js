@@ -70,12 +70,9 @@ public class MapsActivity extends FragmentActivity implements FragmentListener {
                     public void onClick(DialogInterface arg0, int arg1) {
                         finish();
                         //close();
-
-
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
-
                     // do something when the button is clicked
                     public void onClick(DialogInterface arg0, int arg1) {
                     }

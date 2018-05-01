@@ -60,6 +60,7 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
     ChooseDestination dataLongitudeLatitude;
     LatLng koordinatAwal;
     LatLng koordinatAkhir;
+    PolylineOptions pOptions;
     public GMapFragment(){
 
     }
@@ -146,9 +147,9 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
         }
          */
         mMap.setMyLocationEnabled(true);
+        this.pOptions = new PolylineOptions();
 
-        PolylineOptions pOptions = new PolylineOptions();
-        pOptions.add(koordinatAwal);
+        this.pOptions.add(koordinatAwal);
         if(dataLongitudeLatitude.indexStasiunAwal < dataLongitudeLatitude.indexStasiunAkhir){
             int curIdx = dataLongitudeLatitude.indexStasiunAwal;
             double curLongitude = dataLongitudeLatitude.longitude.get(curIdx);
@@ -185,7 +186,6 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
         mMap.addMarker(mOptionAkhir);
         mMap.addPolyline(pOptions);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(koordinatAwal, 17));
-
     }
 
     protected synchronized void buildGoogleApiClient() {
