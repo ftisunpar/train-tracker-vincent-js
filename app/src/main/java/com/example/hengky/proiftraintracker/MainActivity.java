@@ -2,6 +2,7 @@ package com.example.hengky.proiftraintracker;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static ArrayList<String>listStasiun=new ArrayList<>();
     DatabaseReference rootRef;
     Button buttonNext,buttonSearch;
+
+
+    //CountingIdlingResource idlingResource=new CountingIdlingResource("LIST_STASIUN_LOADER");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 for(DataSnapshot dss : dataSnapshot.getChildren()) {
                     String namaKota=dss.getValue().toString();
                     listStasiun.add(namaKota);
+                   // idlingResource.increment();
                     //Log.d("-------------------", namaKota);
                 }
             }
