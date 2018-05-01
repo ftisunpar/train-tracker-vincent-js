@@ -53,10 +53,9 @@ public class OnProgress extends AppCompatActivity implements LocationListener {
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         this.onLocationChanged(null);
-        TextView distance = (TextView) this.findViewById(R.id.distance);
+        //TextView distance = (TextView) this.findViewById(R.id.distance);
         double disRes = this.calculateDistance(6.9142638, 107.6023507 , -7.265422,112.751889 );
-        this.distance = disRes;
-        distance.setText(String.format("%.2f", disRes)+" km");
+        //distance.setText(String.format("%.2f", disRes)+" km");
     }
 
     public void setNotification(){
@@ -122,7 +121,7 @@ public class OnProgress extends AppCompatActivity implements LocationListener {
         TextView txt = (TextView) this.findViewById(R.id.velocity);
         TextView txtTime = (TextView) this.findViewById(R.id.TimeE);
         if(location==null){
-            txt.setText("-.- m/s");
+            txt.setText("0.0 m/s");
         }
         else{
             double nCurrentSpeed = location.getSpeed();
@@ -161,7 +160,7 @@ public class OnProgress extends AppCompatActivity implements LocationListener {
         dist = Math.acos(dist);
         dist = rad2deg(dist);
         dist = dist * 60 * 1.1515;
-        return dist;
+        return (dist);
     }
 
     private double deg2rad(double deg) {

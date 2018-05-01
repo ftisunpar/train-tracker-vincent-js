@@ -1,15 +1,18 @@
 package com.example.hengky.proiftraintracker;
 
-import android.*;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
+
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -24,82 +27,118 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
+import org.angmarch.views.NiceSpinner;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
+
 
 public class ChooseDestination extends AppCompatActivity implements  View.OnClickListener{
     private static final int MY_PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 10;
-    Button buttonMap, buttonGo;
-    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("ListKereta").child("argo wilis");
-    ArrayList<String> List = new ArrayList<>();
-    Map<String, Object> map;
+    Button buttonMap;
+    MainActivity daftarStasiun;
+    static ArrayList<String>listStasiun = new ArrayList<>();
+    static ArrayList<Double> latitude= new ArrayList<>();;
+    static ArrayList<Double> longitude= new ArrayList<>();;
+    static String stasiunAwal;
+    static String stasiunAkhir;
+    static int indexStasiunAwal;
+    static int indexStasiunAkhir;
+    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("listStasiun");
+    int x=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_destination);
+
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-
-        ValueEventListener eventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    map = (Map<String, Object>) ds.getValue();
-                    Log.d("-------------------", "Value is: " + "oke mantab");
-
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                List.add("gagal");
-            }
-        };
-        rootRef.addValueEventListener(eventListener);
-
-
-        TextView textView = findViewById(R.id.argo_wilis);
+        TextView textView = findViewById(R.id.nama_kereta);
         textView.setText(message);
 
-        String[]list_stasiun = getResources().getStringArray(R.array.list_stasiun_argo_wilis);
-        Spinner spinner1 = this.findViewById(R.id.spinner_start_wilis);
+        daftarStasiun = new MainActivity();
+        listStasiun = daftarStasiun.getListStasiun();
+        this.latitude.clear();
+        this.longitude.clear();
+
+        final String [] listKota = getListStasiunArr();
+        for(int i=0;i<listKota.length;i++){
+            final String kotaSekarang = listKota[i];
+            DatabaseReference rootReff = FirebaseDatabase.getInstance().getReference("ListStasiun").child(kotaSekarang);
+            ValueEventListener eventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot dss : dataSnapshot.getChildren()) {
+                        if((x%2)==0){
+                            latitude.add(Double.parseDouble(dss.getValue(Object.class).toString()));
+                            Log.d("------------",String.valueOf(latitude.get(0)));
+                        }
+                        else{
+                            longitude.add(Double.parseDouble(dss.getValue(Object.class).toString()));
+                        }
+                        x++;
+                        Log.d("-----------------------",kotaSekarang );
+                       Log.d("-----------------------", dss.getValue(Object.class).toString());
+                        Log.d("-----------------------", "***********************");
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.d("-------------------", "gagal ");
+                }
+            };
+            rootReff.addValueEventListener(eventListener);
+        }
+
+        final Spinner spinner1 = this.findViewById(R.id.spinner_start_stasiun);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list_stasiun);
+                R.layout.spinner_style, getListStasiunArr());
         spinner1.setAdapter(adapter);
 
-        Spinner spinner2 =this.findViewById(R.id.spinner_end_wilis);
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                stasiunAwal = spinner1.getSelectedItem().toString();
+                indexStasiunAwal = spinner1.getSelectedItemPosition();
+                Toast.makeText(ChooseDestination.this, ("Stasiun awal : "+ stasiunAwal ), Toast.LENGTH_LONG).show();
+
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        final Spinner spinner2 =this.findViewById(R.id.spinner_end_stasiun);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list_stasiun);
+                R.layout.spinner_style, getListStasiunArr());
         spinner2.setAdapter(adapter2);
+
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                stasiunAkhir = spinner2.getSelectedItem().toString();
+                indexStasiunAkhir = spinner2.getSelectedItemPosition();
+                Toast.makeText(ChooseDestination.this, ("Stasiun akhir : "+ stasiunAkhir ), Toast.LENGTH_LONG).show();
+
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
         reqPermission();
 
         buttonMap = this.findViewById(R.id.btnOpenMap);
-        buttonGo = this.findViewById(R.id.btn_go);
-
-//        buttonMap.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                openMap(view);
-//
-//            }
-//        });
-//        buttonGo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                moveToTripPage(view);
-//            }
-//        });
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId()==buttonGo.getId()){
-            moveToTripPage(view);
-        }
-        else if(view.getId()==buttonMap.getId()){
+        if(view.getId()==buttonMap.getId()){
             openMap(view);
         }
     }
@@ -144,19 +183,28 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
                                 "To enable it, go on setting -> app -> Train Tracker and grant location service permission").show();
                     }
                 }
-
                 break;
         }
     }
 
-    public void moveToTripPage(View view){
-        Intent intent = new Intent(this, OnProgress.class);
-        startActivity(intent);
+    public void openMap(View view){
+        if(indexStasiunAwal == indexStasiunAkhir){
+            Toast.makeText(ChooseDestination.this, ("Stasiun akhir dan stasiun awal tidak boleh sama"), Toast.LENGTH_LONG).show();
+        }
+        else{
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
+        }
+
     }
 
-    public void openMap(View view){
-        Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
+    private String[] getListStasiunArr(){
+        String[] some_array = new String[listStasiun.size()];
+        for (int i=0 ; i<listStasiun.size();i++){
+            some_array[i]=listStasiun.get(i);
+        }
+        return some_array;
     }
+
 
 }
