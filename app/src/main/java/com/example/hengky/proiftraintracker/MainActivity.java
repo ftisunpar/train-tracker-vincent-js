@@ -45,21 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.splashScreenAct = new SplashScreenActivity();
         namaKereta = splashScreenAct.getKereta();
         setContentView(R.layout.main_page);
-        ValueEventListener eventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String name = ds.getValue(String.class);
-                    List.add(name);
-                    Log.d("-------------------", name);
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                List.add("gagal");
-            }
-        };
-        rootRef.addValueEventListener(eventListener);
+        
 
         buttonNext = findViewById(R.id.btn_next);
         buttonSearch = findViewById(R.id.btn_search);

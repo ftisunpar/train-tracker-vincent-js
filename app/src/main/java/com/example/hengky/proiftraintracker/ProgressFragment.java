@@ -61,21 +61,23 @@ public class ProgressFragment extends Fragment implements LocationListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.on_progress_trip, container, false);
-        this.isRinging = new boolean[dataStasiun.indexStasiunAkhir+1];
         this.txt = view.findViewById(R.id.velocity);
         this.selanjutnya = view.findViewById(R.id.stasiunSelanjutnya);
         this.akhir = view.findViewById(R.id.stasiunAkhir);
         this.finalEstimation =  view.findViewById(R.id.finalStationEstimation);
         this.nextEstimation = view.findViewById(R.id.nextStationEstimation);
+
         dataStasiun = new ChooseDestination();
+        this.isRinging = new boolean[dataStasiun.indexStasiunAkhir+1];
+        for(int i=0;i<isRinging.length;i++){
+            isRinging[i]=false;
+        }
         this.isArrived = false;
         this.idxSekarang = dataStasiun.indexStasiunAwal;
         this.idxAkhir = dataStasiun.indexStasiunAkhir;
 
         this.idxSelanjutnya = (idxSekarang < idxAkhir)? (idxSekarang + 1) : (idxSekarang-1);
-        Log.d("index awal", String.valueOf(idxSekarang));
-        Log.d("index selanjutnya", String.valueOf(idxSelanjutnya));
-        Log.d("index akhir", String.valueOf(idxAkhir));
+
         stasiunSelanjutnya = dataStasiun.listStasiun.get(idxSelanjutnya);
         stasiunAkhir = dataStasiun.stasiunAkhir;
 
@@ -98,29 +100,15 @@ public class ProgressFragment extends Fragment implements LocationListener {
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
         this.onLocationChanged(null);
-//        if(idxSekarang < idxAkhir ){
-//            lat1 = dataStasiun.latitude.get(nextIdx-1);
-//            lng1 = dataStasiun.longitude.get(nextIdx-1);
-//        }
-//        else{
-//            lat1 = dataStasiun.latitude.get(nextIdx+1);
-//            lng1 = dataStasiun.longitude.get(nextIdx+1);
-//        }
+
         lat1= dataStasiun.latitude.get(idxSekarang);
         lng1 = dataStasiun.longitude.get(idxSekarang);
 
-//        String lokasi1=dataStasiun.listStasiun.get(nextIdx);
-//        Log.d("test lokasi 1", lokasi1+ ": "+ String.valueOf(lat1)+" , "+String.valueOf(lng1));
-
         lat2 = dataStasiun.latitude.get(idxSelanjutnya);
         lng2 = dataStasiun.longitude.get(idxSelanjutnya);
-        String lokasi2=dataStasiun.listStasiun.get(idxSelanjutnya);
-        Log.d("test lokasi selanjutnya", lokasi2+ ": "+ String.valueOf(lat2)+" , "+String.valueOf(lng2));
 
         latLast = dataStasiun.latitude.get(dataStasiun.indexStasiunAkhir);
         lngLast = dataStasiun.longitude.get(dataStasiun.indexStasiunAkhir);
-        String lokasi3=dataStasiun.listStasiun.get(dataStasiun.indexStasiunAkhir);
-        Log.d("test lokasi akhir", lokasi3+ ": "+ String.valueOf(latLast)+" , "+String.valueOf(lngLast));
 
         double totalDisRes = this.calculateDistance(lat1, lng1, latLast, lngLast );
         double nextDisRes = this.calculateDistance(lat1, lng1, lat2, lng2);
@@ -162,20 +150,20 @@ public class ProgressFragment extends Fragment implements LocationListener {
             txt.setText("0.0 km/h");
         }
         else{
-            float nCurrentSpeed = (float) (location.getSpeed());
+            float nCurrentSpeed = (float) (location.getSpeed()*3.6);
 
-            txt.setText(String.format("%.0f km/h", nCurrentSpeed*3.6));
+            txt.setText(String.format("%.0f km/h", nCurrentSpeed));
 
             curLatitude = location.getLatitude();
             curLongitude = location.getLongitude();
 
-
             double totalDisRes = this.calculateDistance(curLatitude, curLongitude , latLast,lngLast );
             double nextDisRes = this.calculateDistance(curLatitude, curLongitude, lat2, lng2);
+
             String estimasiStasiunSelanjutnya, estimasiStasiunAkhir;
             if(nCurrentSpeed >= 25){
-                estimasiStasiunSelanjutnya = calculateTime(nextDisRes*1000, nCurrentSpeed);
-                estimasiStasiunAkhir = calculateTime(totalDisRes*1000, nCurrentSpeed);
+                estimasiStasiunSelanjutnya = calculateTime(nextDisRes*1000, nCurrentSpeed/3.6);
+                estimasiStasiunAkhir = calculateTime(totalDisRes*1000, nCurrentSpeed/3.6);
             }
             else{
                 estimasiStasiunSelanjutnya = calculateTime(nextDisRes*1000, 25/3.6);
@@ -255,17 +243,7 @@ public class ProgressFragment extends Fragment implements LocationListener {
     public void setNotifSaatDekatStasiun(String stasiun){
         Intent intent =new Intent();
         PendingIntent pIntent = PendingIntent.getActivity(this.mapsActivity, 0, intent, 0);
-//        Notification noti = new Notification.Builder(this.mapsActivity)
-//                .setTicker("Train Tracker")
-//                .setContentTitle("Train Tracker")
-//                .setWhen(System.currentTimeMillis())
-//                .setContentText("Sebentar lagi anda akan tiba di " + stasiun)
-//                .setSmallIcon(R.drawable.train_icon)
-//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//                .setContentIntent(pIntent).getNotification();
-//        noti.flags = Notification.FLAG_AUTO_CANCEL;
-//        NotificationManager nm = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
-//        nm.notify(0, noti);
+
         NotificationCompat.Builder notific = new NotificationCompat.Builder(this.mapsActivity);
         notific.setAutoCancel(true);
         notific.setSmallIcon(R.drawable.train_icon);
