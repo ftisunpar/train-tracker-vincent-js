@@ -1,19 +1,19 @@
 # Train Tracker App
-Aplikasi ini merupakan aplikasi yang dibuat dalam rangka memenuhi tugas Proyek Informatika. Aplikasi ini dapat digunakan oleh pengguna untuk mengetahui lokasi stasiun selanjutnya dan stasiun tujuan ketika pengguna menggunakan sarana transportasi kereta. Aplikasi ini akan memberikan notifikasi kepada pengguna ketika pengguna sudah mendekati stasiun selajutnya atau stasiun tujuan.
+Train Tracker App is an android mobile based application that is build for fullfilling "Proyek Informatika " course assignment. This mobile application can be use by user that are planned to use train for their transportation and for the purpose of getting information of the next station and the destination station  such as how long will it arrive to the next station ; how far is the next station to the current locaiton, etc. This mobile application will give notification to user when user is detected getting closer to the next station or destination station. 
 
 ---
 
-## **Fitur**
+## **Features**
 
-1. Notifikasi ketika pengguna sudah dekat dengan stasiun selanjutnya
+1. Notification when user is getting closer to the next station.
 
-2. Notifikasi ketika pengguna sudah sampai di stasiun tujuan
+2. Notification when user has arrived in destination station.
 
-3. Estimasi Waktu untuk mencapai stasiun selanjutnya atau stasiun tujuan
+3. Next station and destination station estimated time of arrival.
 
-4. Mendeteksi kecepatan kereta
+4. Detecting train moving speed (km per hour)
 
-5. Google Maps untuk mengetahui posisi pengguna.
+5. Google Maps for showing user exact position
 
 
 ---
@@ -35,11 +35,11 @@ Mobile Environment Support : **Android**
 2. Install APK Train Tracker di Smartphone Android
 
 ---
-## **Anggota Kelompok**
+## **Team Members**
 
-Ketua -> **Vincent JS**
+Leader **Vincent JS**
 
-Anggota
+Members
 
 1. **Hengky Surya**
 
