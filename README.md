@@ -7,6 +7,8 @@ Aplikasi ini merupakan aplikasi yang dibuat dalam rangka memenuhi tugas Proyek I
 
 Development Framework : **Android Studio**
 
+Database : **Google Firebase**
+
 Mobile Environment Support : **Android**
 
 ---
