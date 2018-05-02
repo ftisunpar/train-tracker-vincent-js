@@ -24,7 +24,7 @@ public class MainActivityTest {
      */
     @Before
     public void init(){
-        mainActivityActivityTestRule.getActivity().initializeFirebaseListStasiun();
+        mainActivityActivityTestRule.getActivity();
     }
 
     /**
@@ -40,7 +40,7 @@ public class MainActivityTest {
     @Test
     public void searchButtonTest(){
         Espresso.onView(ViewMatchers.withId(R.id.btn_search)).perform(ViewActions.click(),ViewActions
-                .typeText("Argo Parahyangan"));
+                .typeText("Parahyangan"));
         ArrayList<String> train = mainActivityActivityTestRule.getActivity().namaKereta;
 
         //TODO change expected to size when "parahyangan" entered as search query
