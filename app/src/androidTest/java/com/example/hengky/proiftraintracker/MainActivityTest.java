@@ -1,94 +1,48 @@
 package com.example.hengky.proiftraintracker;
 
-import android.service.chooser.ChooserTargetService;
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.ViewAction;
+import android.support.test.espresso.*;
 import android.support.test.espresso.action.ViewActions;
-import android.support.test.espresso.base.IdlingResourceRegistry;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
-import android.view.View;
-import android.widget.ActionMenuView;
+import android.support.test.runner.AndroidJUnit4;
 
-import org.hamcrest.Matcher;
-import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import java.util.Map;
-import java.util.concurrent.CountDownLatch;
-
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.typeText;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
-import static org.hamcrest.CoreMatchers.anything;
-import static org.junit.Assert.*;
+import java.util.ArrayList;
 
 public class MainActivityTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mainActivityActivityTestRule=new ActivityTestRule<MainActivity>(MainActivity.class);
+    public ActivityTestRule<MainActivity> mainActivityActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
-    @Rule
-    public ActivityTestRule<ChooseDestination> chooseDestinationActivityTestRule=new ActivityTestRule<ChooseDestination>(ChooseDestination.class);
-    CountDownLatch countDownLatch=new CountDownLatch(100);
-
-    //@Rule
-   // public ActivityTestRule<MapsActivity> mapsActivityActivityTestRule=new ActivityTestRule<MapsActivity>(MapsActivity.class);
-
- //   IdlingResourceRegistry idlingResourceRegistry=new IdlingResourceRegistry(MainActivity.getListStasiun());
-
+    /**
+     * Init Stasiun List to make next button working before executing test annotation
+     */
     @Before
-    public void setUp() throws Exception {
+    public void init(){
+        mainActivityActivityTestRule.getActivity();
     }
 
-    @After
-    public void tearDown() throws Exception {
-    }
-
+    /**
+     * Test if the next button worked flawlessly
+     */
     @Test
-    public void onCreate() {
+    public void testButtonNext() {
+        mainActivityActivityTestRule.getActivity().selectedTrain = "not null";
+        Espresso.onView(ViewMatchers.withId(R.id.btn_next)).perform(ViewActions.click());
+        Assert.assertTrue(mainActivityActivityTestRule.getActivity().isFinishing());
     }
 
-    @Test
-    public void moveToAnotherActivity() {
-    }
-
-    @Test
-    public void initializeFirebaseListStasiun() {
-    }
-
-    @Test
-    public void getListStasiun() {
-    }
-
-    @Test
-    public void onClick() throws InterruptedException {
-        Thread.sleep(700);
-        Espresso.onView(withId(R.id.btn_search)).perform(click());
-     mainActivityActivityTestRule.getActivity().initializeFirebaseListStasiun();
-        countDownLatch.await();
-     mainActivityActivityTestRule.getActivity().getListStasiun();
-        Thread.sleep(1000);
-     ViewActions.typeText("Argo");
-        Thread.sleep(1000);
-        ViewActions.closeSoftKeyboard();
-        Thread.sleep(1000);
-        Espresso.pressBack();
-
-        Thread.sleep(1000);
-    mainActivityActivityTestRule.getActivity().selectedTrain="Argo Wilis";
-     Thread.sleep(1000);
-        Espresso.onView(withId(R.id.btn_next)).perform(click());
-       Thread.sleep(1000);
-       Espresso.onData(anything()).inAdapterView(withId(R.id.spinner_start_stasiun)).atPosition(0).perform(click());
-        Thread.sleep(1000);
-        Espresso.onData(anything()).inAdapterView(withId(R.id.spinner_end_stasiun)).atPosition(0).perform(click());
-        Thread.sleep(1000);
-        Espresso.onView(withId(R.id.btnOpenMap)).perform(click());
-
-    }
-
-
+//    @Test
+//    public void searchButtonTest(){
+//        Espresso.onView(ViewMatchers.withId(R.id.btn_search)).perform(ViewActions.click());
+//        ArrayList<String> train = mainActivityActivityTestRule.getActivity().namaKereta;
+//
+//        //TODO change expected to size when "parahyangan" entered as search query
+//        Assert.assertEquals(13,train.size()-1);
+//    }
 }
