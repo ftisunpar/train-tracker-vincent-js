@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 public class FinishActivityTest {
 
     @Rule
-    ActivityTestRule<FinishActivity> finishActivityActivityTestRule = new ActivityTestRule<>(FinishActivity.class);
+    public ActivityTestRule<FinishActivity> finishActivityActivityTestRule = new ActivityTestRule<>(FinishActivity.class);
 
     @Before
     public void init(){
