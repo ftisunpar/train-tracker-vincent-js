@@ -1,10 +1,2 @@
-# train-tracker-vincent-js
-train-tracker-vincent-js created by GitHub Classroom
-yg harus dikerjakan:
-
-1. map harus jadi
-2. deteksi lokasi
-3. list lokasi harus muncul di dropdown
-4. link2 sudah bisa diklik ke activity lain
-5. layout saat trip
-6. hardcode daftar list stasiun
+# Train Tracke App
+Aplikasi ini merupakan aplikasi yang dibuat dalam rangka memenuhi tugas Proyek Informatika. Aplikasi ini dapat digunakan oleh pengguna untuk mengetahui lokasi stasiun selanjutnya dan stasiun tujuan ketika pengguna menggunakan sarana transportasi kereta.
