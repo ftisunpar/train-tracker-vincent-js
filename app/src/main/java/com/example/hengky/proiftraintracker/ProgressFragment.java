@@ -66,7 +66,6 @@ public class ProgressFragment extends Fragment implements LocationListener {
         this.akhir = view.findViewById(R.id.stasiunAkhir);
         this.finalEstimation =  view.findViewById(R.id.finalStationEstimation);
         this.nextEstimation = view.findViewById(R.id.nextStationEstimation);
-
         dataStasiun = new ChooseDestination();
         this.isRinging = new boolean[dataStasiun.indexStasiunAkhir+1];
         for(int i=0;i<isRinging.length;i++){
@@ -174,13 +173,13 @@ public class ProgressFragment extends Fragment implements LocationListener {
             finalEstimation.setText("Stasiun akhir : " + estimasiStasiunAkhir);
 
             //untuk memberi notifikasi saat sudah dekat stasiun
-            if(nextDisRes<0.75) { // jika jarak lebih kecil dari 750 meter, diasumsikan sudah dekat dengan stasiun berikutnya
+            if(nextDisRes<1.0) { // jika jarak lebih kecil dari 1 kilometer, diasumsikan sudah dekat dengan stasiun berikutnya
                 if(isRinging[idxSelanjutnya]==false){//agar tidak berdering lebih dari satu kali
                     setNotifSaatDekatStasiun(dataStasiun.listStasiun.get(idxSelanjutnya));
                     isRinging[idxSelanjutnya] = true;
                 }
 
-                if(idxSelanjutnya == dataStasiun.indexStasiunAkhir && isArrived == false && nextDisRes<0.05){//jika jarak lebih kecil dari 50 meter, diasumsikan sudah sampai
+                if(idxSelanjutnya == dataStasiun.indexStasiunAkhir && isArrived == false && nextDisRes<0.1){//jika jarak lebih kecil dari 100 meter, diasumsikan sudah sampai
                     this.locationManager.removeUpdates(this);
                     this.locationManager = null;
                     this.isArrived = true;
@@ -280,8 +279,6 @@ public class ProgressFragment extends Fragment implements LocationListener {
         else{
             timeString = String.format("%.0f Jam %.0f Menit", hours, minutes);
         }
-
-
         return timeString;
     }
 

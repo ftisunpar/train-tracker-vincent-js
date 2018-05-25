@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void moveToAnotherActivity(String train){
         Intent intent = new Intent(this, ChooseDestination.class);
         intent.putExtra(EXTRA_MESSAGE, train);
+        //finish();
         startActivity(intent);
     }
 
