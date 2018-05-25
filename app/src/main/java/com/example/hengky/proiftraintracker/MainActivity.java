@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.splashScreenAct = new SplashScreenActivity();
         namaKereta = splashScreenAct.getKereta();
         setContentView(R.layout.main_page);
-        
 
         buttonNext = findViewById(R.id.btn_next);
         buttonSearch = findViewById(R.id.btn_search);
@@ -68,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void moveToAnotherActivity(String train){
+        //finish();
         Intent intent = new Intent(this, ChooseDestination.class);
         intent.putExtra(EXTRA_MESSAGE, train);
         //finish();
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 for(DataSnapshot dss : dataSnapshot.getChildren()) {
                     String namaKota=dss.getValue().toString();
                     listStasiun.add(namaKota);
-                   // idlingResource.increment();
+                    // idlingResource.increment();
                     //Log.d("-------------------", namaKota);
                 }
             }

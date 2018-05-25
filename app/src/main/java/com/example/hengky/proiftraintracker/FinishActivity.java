@@ -21,6 +21,7 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         if (view == btnFinish){
+            //finish();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
