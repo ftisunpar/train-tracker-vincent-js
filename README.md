@@ -30,7 +30,7 @@ Mobile Environment Support : **Android**
 
 ## **Installation**
 
-1. Download Train Tracker APK from this link https://goo.gl/BSmXio
+1. Download Train Tracker APK from this link https://bit.ly/2L2Klfp
 
 2. Install Train Tracker APK from your Android Smartphone.
 

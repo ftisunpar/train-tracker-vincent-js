@@ -193,6 +193,7 @@ public class ChooseDestination extends AppCompatActivity implements  View.OnClic
         }
         else{
             Intent intent = new Intent(this, MapsActivity.class);
+            //finish();
             startActivity(intent);
         }
 
